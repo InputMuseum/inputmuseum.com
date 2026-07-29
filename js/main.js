@@ -1,6 +1,6 @@
-import { el, plaqueBlurb, plaqueMeta, plaqueTitle } from "./dom.js";
+import { el, plaqueBlurb, plaqueMeta, plaqueTitle, stage } from "./dom.js";
 import { lookup, openingRoute } from "./registry.js";
-import { replaceRoute, startRouter } from "./router.js";
+import { formatRoute, replaceRoute, startRouter } from "./router.js";
 import { buildRail, closeMenu, initMenu, markRail } from "./sidebar.js";
 import { showExhibit } from "./stage.js";
 import { initStatus } from "./status.js";
@@ -8,34 +8,47 @@ import { buildTabs, markTabs } from "./tabs.js";
 
 const CRUELTY_MAX = 5;
 
-let shownCategory = null;
+let shown = null;
 
 buildRail();
 initMenu();
 initStatus();
+initSkipLink();
 startRouter(onRoute);
 
 function onRoute(route) {
   const found = route && lookup(route.category, route.exhibit);
-  if (found && !found.exhibit.soon) {
-    show(found);
-    return;
-  }
-  replaceRoute(openingRoute);
-  show(lookup(openingRoute.category, openingRoute.exhibit));
+  // Anything that doesn't name a built exhibit leaves the visitor where they
+  // are, so an in-page anchor can't restart an exhibit halfway through it.
+  const target =
+    found && !found.exhibit.soon
+      ? found
+      : (shown ?? lookup(openingRoute.category, openingRoute.exhibit));
+
+  const wanted = { category: target.category.id, exhibit: target.exhibit.id };
+  if (location.hash !== formatRoute(wanted)) replaceRoute(wanted);
+  if (target.exhibit !== shown?.exhibit) show(target);
 }
 
-function show({ category, exhibit }) {
+function show(target) {
+  const { category, exhibit } = target;
   closeMenu();
   markRail(category.id);
-  if (category !== shownCategory) {
-    buildTabs(category);
-    shownCategory = category;
-  }
+  if (category !== shown?.category) buildTabs(category);
   markTabs(exhibit.id);
   fillPlaque(exhibit);
   document.title = `${exhibit.label} — Bad Designs`;
+  shown = target;
   showExhibit(category, exhibit);
+}
+
+// The href is what works without scripts; with them, focus moves without a
+// history entry nobody wants to walk back through.
+function initSkipLink() {
+  document.querySelector(".skip-link").addEventListener("click", (event) => {
+    event.preventDefault();
+    stage.focus();
+  });
 }
 
 function fillPlaque(exhibit) {
