@@ -1,4 +1,5 @@
-import { el, plaqueBlurb, plaqueMeta, plaqueTitle, stage } from "./dom.js";
+import { plaqueBlurb, plaqueMeta, plaqueTitle, stage } from "./dom.js";
+import { el } from "./el.js";
 import { lookup, openingRoute } from "./registry.js";
 import { formatRoute, replaceRoute, startRouter } from "./router.js";
 import { buildRail, closeMenu, initMenu, markRail } from "./sidebar.js";

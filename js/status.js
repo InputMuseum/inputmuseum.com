@@ -1,5 +1,6 @@
 import { announce } from "./announce.js";
-import { el, receipt, receiptBody, resetBtn, statusClock, statusFields, submitBtn } from "./dom.js";
+import { receipt, receiptBody, resetBtn, statusClock, statusFields, submitBtn } from "./dom.js";
+import { el } from "./el.js";
 import { BLANK, restartSession, snapshot, subscribe } from "./session.js";
 
 const TICK_MS = 1000;

@@ -33,6 +33,19 @@ test("every built exhibit has the two files the stage loads", () => {
     }
 });
 
+test("every built exhibit exports the contract the stage calls", async () => {
+  for (const { categoryId, exhibitId } of built) {
+    const module = await import(`../../${exhibitAsset(categoryId, exhibitId, "exhibit.js")}`);
+    assert.ok(Array.isArray(module.fields), `${exhibitId} exports a fields array`);
+    assert.ok(module.fields.length > 0, `${exhibitId} captures at least one field`);
+    assert.equal(typeof module.mount, "function", `${exhibitId} exports mount`);
+    for (const field of module.fields) {
+      assert.equal(typeof field.name, "string");
+      assert.equal(typeof field.label, "string");
+    }
+  }
+});
+
 test("an exhibit marked soon has nothing on disk yet", () => {
   for (const category of CATEGORIES)
     for (const exhibit of category.exhibits.filter((entry) => entry.soon)) {

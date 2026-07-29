@@ -1,5 +1,6 @@
 import { CATEGORIES, isBuilt } from "./registry.js";
-import { el, menuBtn, narrowMQ, rail, railList, scrim } from "./dom.js";
+import { menuBtn, narrowMQ, rail, railList, scrim } from "./dom.js";
+import { el } from "./el.js";
 import { formatRoute } from "./router.js";
 
 export function buildRail() {

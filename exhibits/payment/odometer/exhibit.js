@@ -1,4 +1,4 @@
-import { el } from "../../../js/dom.js";
+import { el } from "../../../js/el.js";
 import { duration } from "../../../js/motion.js";
 import {
   DIGITS,

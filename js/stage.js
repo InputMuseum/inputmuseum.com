@@ -1,6 +1,7 @@
 import { announce } from "./announce.js";
 import { loadCssOnce } from "./css-loader.js";
-import { el, stage } from "./dom.js";
+import { stage } from "./dom.js";
+import { el } from "./el.js";
 import { exhibitAsset } from "./registry.js";
 import { beginSession, setValue } from "./session.js";
 

@@ -1,4 +1,5 @@
-import { el, tabList } from "./dom.js";
+import { tabList } from "./dom.js";
+import { el } from "./el.js";
 import { formatRoute } from "./router.js";
 
 export function buildTabs(category) {
