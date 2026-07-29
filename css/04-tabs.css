@@ -20,6 +20,12 @@
   padding: 0 16px;
 }
 
+/* the list item is what stretches to the bar's height; without this the tab
+   inside it keeps its own content height and rides the top edge */
+#tabList li {
+  display: flex;
+}
+
 .tab {
   display: flex;
   align-items: center;
