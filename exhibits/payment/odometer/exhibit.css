@@ -1,5 +1,5 @@
 [data-exhibit="payment/odometer"] .odo {
-  --odo-size: clamp(15px, 4.2vw, 30px);
+  --odo-size: clamp(13px, 3.7vw, 30px);
   display: grid;
   gap: 26px;
   width: min(100%, 720px);
@@ -10,6 +10,10 @@
   justify-content: center;
   gap: 0.55em;
   font-size: var(--odo-size);
+  /* sixteen wheels stay one row: below the smallest legible size the readout
+     scrolls rather than wrapping into something that isn't a card number */
+  overflow-x: auto;
+  padding-bottom: 2px;
 }
 
 [data-exhibit="payment/odometer"] .odo-group {
@@ -19,6 +23,7 @@
 
 [data-exhibit="payment/odometer"] .odo-cell {
   position: relative;
+  flex: none;
   overflow: hidden;
   width: 1.15em;
   height: 1.6em;
@@ -73,17 +78,18 @@
   letter-spacing: 0.09em;
 }
 
+/* Fixed end columns rather than intrinsic ones, so the two sliders line up
+   however long the place names get. */
 [data-exhibit="payment/odometer"] .odo-track {
-  display: flex;
+  display: grid;
+  grid-template-columns: 7em minmax(0, 1fr) 3em;
   align-items: center;
   gap: 10px;
+  font-size: 11px;
 }
 
 [data-exhibit="payment/odometer"] .odo-end {
-  flex: none;
-  width: 9ch;
   color: #6b7079;
-  font-size: 11px;
 }
 
 [data-exhibit="payment/odometer"] .odo-end:last-child {
@@ -98,7 +104,6 @@
 }
 
 [data-exhibit="payment/odometer"] .odo-range {
-  flex: 1;
   min-width: 0;
   height: 22px;
   accent-color: var(--accent);
@@ -136,7 +141,7 @@
     grid-column: 1;
   }
 
-  [data-exhibit="payment/odometer"] .odo-end {
-    width: 7ch;
+  [data-exhibit="payment/odometer"] .odo {
+    gap: 20px;
   }
 }

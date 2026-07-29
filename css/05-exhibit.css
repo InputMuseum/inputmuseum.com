@@ -51,6 +51,10 @@
 /* The frame an exhibit builds itself inside: a plinth under a spotlight. */
 .plinth {
   position: relative;
+  /* a grid item won't shrink under its content's min-width on its own, and an
+     exhibit that overflows would take the whole page sideways with it */
+  min-width: 0;
+  max-width: 100%;
   padding: 30px 34px;
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -76,4 +80,18 @@
   font-family: var(--serif);
   font-size: 18px;
   font-weight: 400;
+}
+
+@media (max-width: 560px) {
+  .plinth {
+    padding: 20px 16px;
+  }
+
+  #plaque {
+    padding: 18px 4px 14px;
+  }
+
+  #plaqueTitle {
+    font-size: 22px;
+  }
 }
