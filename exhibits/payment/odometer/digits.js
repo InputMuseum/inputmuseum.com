@@ -1,35 +1,38 @@
 // The odometer's state, as values. No DOM, so the machine can be reasoned
-// about in a test rather than by dragging sliders sixteen times.
+// about in a test rather than by dragging sliders twenty-three times.
 //
 // A place is settled once it has been committed; until then the visitor is
 // only ever editing `pending`, and leaving the place throws that work away.
 
 import { BLANK } from "../../../js/session.js";
 
-export const DIGITS = 16;
 export const MAX_DIGIT = 9;
 
-export const PLACES = [
-  "Quadrillions",
-  "Hundred trillions",
-  "Ten trillions",
-  "Trillions",
-  "Hundred billions",
-  "Ten billions",
-  "Billions",
-  "Hundred millions",
-  "Ten millions",
-  "Millions",
-  "Hundred thousands",
-  "Ten thousands",
-  "Thousands",
-  "Hundreds",
-  "Tens",
-  "Ones",
+const UNITS = ["Ones", "Tens", "Hundreds"];
+const STEPS = ["", "Ten ", "Hundred "];
+const SCALES = [
+  "thousand",
+  "million",
+  "billion",
+  "trillion",
+  "quadrillion",
+  "quintillion",
+  "sextillion",
 ];
 
-export const emptyState = () => ({
-  committed: Array(DIGITS).fill(null),
+// Names run from the most significant place down, so index 0 is the leftmost
+// digit however long the number is.
+export const placeNames = (length) => Array.from({ length }, (_, at) => placeName(length - 1 - at));
+
+function placeName(exponent) {
+  if (exponent < 3) return UNITS[exponent];
+  const scale = `${SCALES[Math.floor(exponent / 3) - 1]}s`;
+  const step = exponent % 3;
+  return step ? `${STEPS[step]}${scale}` : `${scale[0].toUpperCase()}${scale.slice(1)}`;
+}
+
+export const emptyState = (length) => ({
+  committed: Array(length).fill(null),
   place: 0,
   pending: 0,
 });
@@ -62,5 +65,5 @@ export const remaining = (state) => state.committed.filter((digit) => digit === 
 export const report = (state) =>
   state.committed.map((digit) => (digit === null ? BLANK : String(digit))).join("");
 
-export const spellOut = (state) =>
-  state.committed.map((digit) => (digit === null ? "blank" : String(digit))).join(" ");
+export const spellOut = (digits) =>
+  [...digits].map((digit) => (digit === BLANK ? "blank" : digit)).join(" ");
