@@ -24,7 +24,9 @@ then open http://localhost:8000. The repository root is the site — what you se
 | The catalogue | `js/registry.js` — categories and their exhibits, as pure data |
 | The exhibits | `exhibits/<category>/<exhibit>/` — one directory each |
 
-The shell owns everything an exhibit shouldn't have to care about: navigation, the captured values, the elapsed clock, reset and submit. An exhibit owns exactly one thing — a hostile way to enter a value — and reports what it captured back to the shell.
+A category is a form you have filled in a hundred times; the exhibits under it are competing designs for the whole of it. The Odometer takes your card number, expiry and security code — the next exhibit in that category will take the same three, differently.
+
+The shell owns everything an exhibit shouldn't have to care about: navigation, the captured values, the elapsed clock, reset and submit. An exhibit owns exactly one thing — a hostile way to fill the form in — and reports what it captured back to the shell.
 
 Adding one is four steps, none of which touch the shell's logic:
 

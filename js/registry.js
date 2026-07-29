@@ -3,6 +3,10 @@
 // Environment-free on purpose: this module must stay importable outside the
 // browser (the unit tests run it in bare Node).
 //
+// A category is a form its visitors have filled in before; its exhibits are
+// competing designs for that whole form, so they sit beside each other as
+// alternatives rather than as its parts.
+//
 // An entry marked `soon` is announced but not built: it has no directory, and
 // nothing routes to it.
 
@@ -10,18 +14,18 @@ export const CATEGORIES = [
   {
     id: "payment",
     label: "Payment details",
-    blurb: "Sixteen digits. How hard could it be?",
+    blurb: "Twenty-three digits. How hard could it be?",
     exhibits: [
       {
         id: "odometer",
         label: "The Odometer",
         blurb:
-          "Card entry rebuilt around the place-value system, so that each digit is addressed by the quantity it represents rather than by where it happens to sit.",
+          "Your card number, expiry and security code are, taken together, a single twenty-three digit number. Each digit is addressed by the quantity it represents rather than by where it happens to sit.",
         cruelty: 4,
         added: "2026-07-29",
       },
-      { id: "expiry-roulette", label: "Expiry Roulette", soon: true },
-      { id: "cvv-endurance", label: "CVV Endurance", soon: true },
+      { id: "slot-machine", label: "The Slot Machine", soon: true },
+      { id: "bureaucrat", label: "The Bureaucrat", soon: true },
     ],
   },
   {
