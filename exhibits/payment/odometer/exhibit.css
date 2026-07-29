@@ -1,0 +1,142 @@
+[data-exhibit="payment/odometer"] .odo {
+  --odo-size: clamp(15px, 4.2vw, 30px);
+  display: grid;
+  gap: 26px;
+  width: min(100%, 720px);
+}
+
+[data-exhibit="payment/odometer"] .odo-readout {
+  display: flex;
+  justify-content: center;
+  gap: 0.55em;
+  font-size: var(--odo-size);
+}
+
+[data-exhibit="payment/odometer"] .odo-group {
+  display: flex;
+  gap: 2px;
+}
+
+[data-exhibit="payment/odometer"] .odo-cell {
+  position: relative;
+  overflow: hidden;
+  width: 1.15em;
+  height: 1.6em;
+  border-radius: 3px;
+  background: linear-gradient(#0a0b0e, #191b21 45%, #0a0b0e);
+  box-shadow: inset 0 0 0 1px #2b2f38;
+  color: #565b66;
+  font-family: var(--mono);
+  line-height: 1.6em;
+  text-align: center;
+}
+
+[data-exhibit="payment/odometer"] .odo-cell.is-settled {
+  color: var(--text);
+}
+
+[data-exhibit="payment/odometer"] .odo-cell.is-active {
+  box-shadow:
+    inset 0 0 0 1px rgba(var(--accent-rgb), 0.75),
+    0 0 14px -4px rgba(var(--accent-rgb), 0.5);
+  color: var(--accent);
+}
+
+[data-exhibit="payment/odometer"] .odo-strip {
+  display: block;
+  transform: translateY(calc(var(--digit, 0) * -1.6em));
+  transition-property: transform;
+  transition-timing-function: var(--ease);
+}
+
+[data-exhibit="payment/odometer"] .odo-num {
+  display: block;
+  height: 1.6em;
+}
+
+[data-exhibit="payment/odometer"] .odo-controls {
+  display: grid;
+  gap: 18px;
+}
+
+[data-exhibit="payment/odometer"] .odo-control {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr);
+  align-items: center;
+  gap: 6px 14px;
+}
+
+[data-exhibit="payment/odometer"] .odo-label {
+  color: var(--dim);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+[data-exhibit="payment/odometer"] .odo-track {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+[data-exhibit="payment/odometer"] .odo-end {
+  flex: none;
+  width: 9ch;
+  color: #6b7079;
+  font-size: 11px;
+}
+
+[data-exhibit="payment/odometer"] .odo-end:last-child {
+  text-align: right;
+}
+
+[data-exhibit="payment/odometer"] .odo-place-name {
+  grid-column: 2;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+[data-exhibit="payment/odometer"] .odo-range {
+  flex: 1;
+  min-width: 0;
+  height: 22px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+[data-exhibit="payment/odometer"] .odo-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+[data-exhibit="payment/odometer"] .odo-set {
+  font-variant-numeric: tabular-nums;
+}
+
+[data-exhibit="payment/odometer"] .odo-tally {
+  color: var(--dim);
+  font-size: 12px;
+}
+
+[data-exhibit="payment/odometer"] .odo-hint {
+  color: #6b7079;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+@media (max-width: 560px) {
+  [data-exhibit="payment/odometer"] .odo-control {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  [data-exhibit="payment/odometer"] .odo-place-name {
+    grid-column: 1;
+  }
+
+  [data-exhibit="payment/odometer"] .odo-end {
+    width: 7ch;
+  }
+}
