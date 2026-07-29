@@ -18,7 +18,7 @@ No build step. Native ES modules served as they are, plain CSS, zero runtime dep
 - [js/registry.js](js/registry.js) — the catalogue as pure data: `CATEGORIES`, each holding its exhibits' metadata. No imports, no side effects, importable in bare Node. Array order is display order.
 - [js/router.js](js/router.js) — `#/<category>/<exhibit>` and nothing else. `parseRoute`/`formatRoute` are pure; the DOM-facing half starts the listener and resolves an unknown route to the first exhibit via `replaceState`, so a stale link never lands on a blank page.
 - [js/stage.js](js/stage.js) — the exhibit lifecycle: abort the previous one, load its CSS once, dynamically import its module, mount it. An import failure renders a card in the stage and leaves the rest of the site working.
-- [js/session.js](js/session.js) — what the visitor has captured in the current exhibit, the clock, the attempt count. DOM-free, so it is unit-tested in bare Node; it announces itself with a `session-changed` window event and the readouts listen. One direction only: nothing reads back out of the DOM.
+- [js/session.js](js/session.js) — what the visitor has captured in the current exhibit, the clock, the attempt count. DOM-free, so it is unit-tested in bare Node. One direction only: values arrive through `setValue` and leave through subscribers; nothing reads back out of the DOM. A position an exhibit hasn't committed is the `BLANK` character, which is also what makes "complete" answerable for a control whose digits all start at zero.
 - [js/sidebar.js](js/sidebar.js), [js/tabs.js](js/tabs.js), [js/status.js](js/status.js) — the three views built from the registry and the session.
 
 ### The exhibit contract

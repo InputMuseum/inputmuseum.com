@@ -1,0 +1,173 @@
+#app {
+  display: grid;
+  grid-template-columns: var(--rail-w) minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-areas:
+    "brand tabs"
+    "rail  main";
+  height: 100dvh;
+}
+
+#brand {
+  grid-area: brand;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 18px;
+  height: 56px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+
+#menuBtn {
+  display: none;
+}
+
+.brand-name {
+  font-family: var(--serif);
+  font-size: 19px;
+  letter-spacing: 0.02em;
+}
+
+.brand-name em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+#main {
+  grid-area: main;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  min-width: 0;
+  overflow: hidden;
+}
+
+#stage {
+  display: grid;
+  place-items: center;
+  padding: 8px 24px 28px;
+  overflow: auto;
+}
+
+#status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 12px 24px;
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+}
+
+#statusFields {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.st-field {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.st-label {
+  color: var(--dim);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+.st-value {
+  font-family: var(--mono);
+  font-size: 15px;
+  letter-spacing: 0.06em;
+}
+
+.st-value.is-empty {
+  color: var(--dim);
+}
+
+#statusTools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#statusClock {
+  min-width: 5ch;
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+#receipt {
+  max-width: 44ch;
+  padding: 26px 28px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+#receipt::backdrop {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+#receiptTitle {
+  margin-bottom: 12px;
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+}
+
+#receiptBody {
+  margin-bottom: 20px;
+  color: var(--dim);
+  font-size: 14px;
+}
+
+#receiptBody strong {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+}
+
+#receiptBody p + p {
+  margin-top: 8px;
+}
+
+@media (max-width: 860px) {
+  #app {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "brand"
+      "tabs"
+      "main";
+    grid-template-rows: auto auto minmax(0, 1fr);
+  }
+
+  #brand {
+    border-right: none;
+  }
+
+  #menuBtn {
+    display: grid;
+  }
+
+  #stage {
+    padding: 8px 16px 24px;
+  }
+
+  #status {
+    padding: 10px 16px;
+  }
+}

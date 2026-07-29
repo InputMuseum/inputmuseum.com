@@ -1,0 +1,79 @@
+#plaque {
+  max-width: var(--plaque-w);
+  padding: 26px 24px 18px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#plaqueTitle {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+#plaqueBlurb {
+  margin-top: 6px;
+  color: var(--dim);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+#plaqueMeta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+  color: #6b7079;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+.pips {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.pip {
+  width: 6px;
+  height: 6px;
+  border: 1px solid #4a4e57;
+  border-radius: 50%;
+}
+
+.pip.on {
+  border-color: var(--warn);
+  background: var(--warn);
+}
+
+/* The frame an exhibit builds itself inside: a plinth under a spotlight. */
+.plinth {
+  position: relative;
+  padding: 30px 34px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(var(--accent-rgb), 0.06), transparent 65%),
+    var(--surface);
+  box-shadow: 0 22px 60px -30px #000;
+}
+
+.stage-error {
+  max-width: 44ch;
+  padding: 22px 24px;
+  border: 1px solid rgba(var(--warn-rgb), 0.4);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--dim);
+  font-size: 14px;
+}
+
+.stage-error h2 {
+  margin-bottom: 6px;
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+}

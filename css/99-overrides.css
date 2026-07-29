@@ -1,0 +1,39 @@
+@media (prefers-contrast: more) {
+  :root {
+    --dim: #b7bcc6;
+    --line: #4b515c;
+  }
+}
+
+@media (forced-colors: active) {
+  .rail-item[aria-current],
+  .tab[aria-current] {
+    border-color: Highlight;
+  }
+
+  .pip.on {
+    background: Highlight;
+    border-color: Highlight;
+  }
+
+  .plinth,
+  .btn,
+  .iconbtn {
+    border-color: CanvasText;
+  }
+}
+
+@media print {
+  #rail,
+  #tabs,
+  #brand,
+  #status,
+  .skip-link {
+    display: none;
+  }
+
+  #app {
+    display: block;
+    height: auto;
+  }
+}

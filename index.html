@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- connect-src 'none' is the site's promise in enforceable form: nothing entered
+         into an exhibit has anywhere to go. style-src keeps 'unsafe-inline' because
+         exhibits animate by writing element.style.* at runtime. -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0d0e11" />
+    <title>Bad Designs</title>
+    <meta
+      name="description"
+      content="A gallery of input designs that work perfectly and are terrible to use."
+    />
+
+    <!-- Link order is the cascade. Add a partial where its rules belong, not
+         where its filename sorts. -->
+    <link rel="stylesheet" href="css/01-base.css" />
+    <link rel="stylesheet" href="css/02-shell.css" />
+    <link rel="stylesheet" href="css/03-sidebar.css" />
+    <link rel="stylesheet" href="css/04-tabs.css" />
+    <link rel="stylesheet" href="css/05-exhibit.css" />
+    <link rel="stylesheet" href="css/99-overrides.css" />
+
+    <link rel="modulepreload" href="js/main.js" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#stage">Skip to the exhibit</a>
+
+    <div id="app">
+      <header id="brand">
+        <button id="menuBtn" class="iconbtn" aria-controls="rail" aria-expanded="false">
+          <span class="sr-only">Open menu</span>
+          <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true">
+            <path
+              d="M3 5h14M3 10h14M3 15h14"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+        <a class="brand-name" href="#/">Bad<em>Designs</em></a>
+      </header>
+
+      <nav id="tabs" aria-label="Exhibits">
+        <ul id="tabList"></ul>
+      </nav>
+
+      <nav id="rail" aria-label="Categories">
+        <ul id="railList"></ul>
+        <p class="rail-note">
+          Nothing you enter here is sent anywhere. There is no server to send it to.
+        </p>
+      </nav>
+
+      <div id="scrim" hidden></div>
+
+      <main id="main">
+        <div id="plaque">
+          <h1 id="plaqueTitle"></h1>
+          <p id="plaqueBlurb"></p>
+          <p id="plaqueMeta"></p>
+        </div>
+
+        <div id="stage" tabindex="-1"></div>
+
+        <div id="status">
+          <div id="statusFields"></div>
+          <div id="statusTools">
+            <span id="statusClock" aria-hidden="true">0:00</span>
+            <button id="resetBtn" class="btn" type="button">Start over</button>
+            <button id="submitBtn" class="btn btn-primary" type="button" disabled>Submit</button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div id="announcer" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <dialog id="receipt" aria-labelledby="receiptTitle">
+      <h2 id="receiptTitle">Thank you</h2>
+      <div id="receiptBody"></div>
+      <form method="dialog">
+        <button class="btn btn-primary" type="submit">Close</button>
+      </form>
+    </dialog>
+
+    <noscript>
+      <p class="noscript">
+        The exhibits are built in JavaScript, which is switched off. You are, for the moment, having
+        the best experience this site can offer.
+      </p>
+    </noscript>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
