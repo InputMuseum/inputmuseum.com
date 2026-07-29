@@ -45,14 +45,21 @@ function showReceipt() {
   const benchmarkMs = fields.reduce((total, field) => total + (field.benchmarkMs ?? 0), 0);
 
   receiptBody.replaceChildren(
-    ...fields.map((field) => el("strong", { text: group(field, values.get(field.name)) })),
+    ...fields.map((field) =>
+      el(
+        "div",
+        { class: "rc-field" },
+        el("span", { class: "st-label", text: field.label }),
+        el("strong", { text: group(field, values.get(field.name)) }),
+      ),
+    ),
     el("p", {
       text:
         `Captured in ${spell(elapsedMs)}` + (attempts > 1 ? `, over ${attempts} attempts.` : "."),
     }),
     benchmarkMs
       ? el("p", {
-          text: `A field you can type into takes about ${Math.round(benchmarkMs / 1000)} seconds.`,
+          text: `A form you can type into takes about ${Math.round(benchmarkMs / 1000)} seconds.`,
         })
       : null,
   );

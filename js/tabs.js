@@ -1,5 +1,6 @@
 import { tabList } from "./dom.js";
 import { el } from "./el.js";
+import { prefersReducedMotion } from "./motion.js";
 import { formatRoute } from "./router.js";
 
 export function buildTabs(category) {
@@ -10,8 +11,18 @@ export function buildTabs(category) {
 
 export function markTabs(exhibitId) {
   for (const tab of tabList.querySelectorAll("[data-exhibit]")) {
-    if (tab.dataset.exhibit === exhibitId) tab.setAttribute("aria-current", "page");
-    else tab.removeAttribute("aria-current");
+    if (tab.dataset.exhibit !== exhibitId) {
+      tab.removeAttribute("aria-current");
+      continue;
+    }
+    tab.setAttribute("aria-current", "page");
+    // once a category runs to a dozen exhibits the current one is often off
+    // the end of the strip
+    tab.scrollIntoView({
+      behavior: prefersReducedMotion() ? "auto" : "smooth",
+      block: "nearest",
+      inline: "nearest",
+    });
   }
 }
 

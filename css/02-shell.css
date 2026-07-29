@@ -48,6 +48,7 @@
   place-items: center;
   padding: 8px 24px 28px;
   overflow: auto;
+  background: radial-gradient(70% 55% at 50% 38%, rgba(255, 255, 255, 0.022), transparent 72%);
 }
 
 #status {
@@ -112,6 +113,25 @@
   border-radius: 10px;
   background: var(--surface);
   color: var(--text);
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    opacity 0.18s var(--ease),
+    translate 0.18s var(--ease),
+    overlay 0.18s allow-discrete,
+    display 0.18s allow-discrete;
+}
+
+@starting-style {
+  #receipt[open] {
+    opacity: 0;
+    translate: 0 8px;
+  }
+}
+
+#receipt:not([open]) {
+  opacity: 0;
+  translate: 0 8px;
 }
 
 #receipt::backdrop {
@@ -131,9 +151,14 @@
   font-size: 14px;
 }
 
+.rc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-bottom: 12px;
+}
+
 #receiptBody strong {
-  display: block;
-  margin-bottom: 10px;
   color: var(--text);
   font-family: var(--mono);
   font-size: 17px;
@@ -169,5 +194,25 @@
 
   #status {
     padding: 10px 16px;
+  }
+
+  /* a form's worth of readouts would otherwise wrap into a block deep enough
+     to push the exhibit off the screen */
+  #statusFields {
+    gap: 16px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .st-field {
+    flex: none;
+  }
+
+  .st-label {
+    font-size: 10px;
+  }
+
+  .st-value {
+    font-size: 13px;
   }
 }
