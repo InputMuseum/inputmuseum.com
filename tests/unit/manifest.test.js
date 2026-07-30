@@ -98,6 +98,20 @@ test("no repository note sits inside the deploy artifact", () => {
   assert.deepEqual(strays, [], `${strays.join(", ")} would be served`);
 });
 
+// The rail is off-screen below this width and its links have to be made inert
+// to match, which is the one piece of the layout the JS has to know about. The
+// two halves are in different languages, so nothing else can notice a drift.
+test("the narrow layout starts at the same width in the CSS and the JS", () => {
+  const [, query] = readFileSync(at("js/dom.js"), "utf8").match(/matchMedia\("([^"]+)"\)/) ?? [];
+  assert.ok(query, "js/dom.js declares the narrow media query");
+
+  const stylesheets = readdirSync(at("css")).map((name) => readFileSync(at(`css/${name}`), "utf8"));
+  assert.ok(
+    stylesheets.some((css) => css.includes(`@media ${query}`)),
+    `no stylesheet opens at ${query}`,
+  );
+});
+
 test("every exhibit rule is scoped to its own exhibit", () => {
   for (const { categoryId, exhibitId } of built) {
     const scope = `[data-exhibit="${categoryId}/${exhibitId}"]`;
