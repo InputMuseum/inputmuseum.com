@@ -82,7 +82,7 @@ function clock(ms) {
 }
 
 function spell(ms) {
-  const total = Math.round(ms / 1000);
+  const total = Math.floor(ms / 1000);
   const minutes = Math.floor(total / 60);
   const seconds = total % 60;
   const parts = [];
