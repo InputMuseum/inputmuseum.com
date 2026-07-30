@@ -22,7 +22,10 @@ export async function showExhibit(category, exhibit) {
     module = await import(url("exhibit.js"));
   } catch (error) {
     console.error(`[stage] ${category.id}/${exhibit.id} failed to load:`, error);
-    if (!signal.aborted) stage.replaceChildren(failureCard());
+    if (!signal.aborted) {
+      beginSession([]);
+      stage.replaceChildren(failureCard());
+    }
     return;
   }
   if (signal.aborted) return;
