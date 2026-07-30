@@ -46,7 +46,9 @@ The module path is **derived** — `public/exhibits/<category>/<exhibit>/exhibit
 
 ### CSS scoping
 
-Every rule in an `exhibit.css` is scoped under `[data-exhibit="<category>/<exhibit>"]`, which the stage stamps on its container; classes inside carry a short id prefix (`.odo-*`). With no bundler there is nothing else standing between two exhibits' stylesheets, and `tests/unit/manifest.test.js` fails on a selector that escapes its own scope.
+Every rule in an `exhibit.css` is scoped under `[data-exhibit="<category>/<exhibit>"]`, which the stage stamps on its container; classes inside carry a short id prefix (`.odo-*`). With no bundler there is nothing else standing between two exhibits' stylesheets, and `tests/unit/manifest.test.js` fails on a selector that escapes its own scope. An element `id` takes the same prefix and gets no scoping from the stage at all — ids are one namespace shared with the shell's own.
+
+An exhibit inherits the shell's vocabulary rather than restating it: `.plinth` is the lit slab it builds itself on, `.btn` and `.btn-primary` are the site's buttons, and the tokens in `:root` are its palette. Its own stylesheet is for the machine, not for the furniture around it.
 
 Shell CSS is a set of numbered partials linked in [public/index.html](public/index.html) in cascade order. **The `<link>` order is the cascade** — adding a partial means putting its link where its rules belong, not next to its neighbours in the directory listing. Exhibit stylesheets are not linked; [public/js/css-loader.js](public/js/css-loader.js) injects them on first use.
 
