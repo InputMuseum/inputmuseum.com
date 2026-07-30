@@ -9,8 +9,12 @@ let node = null;
 let pending = 0;
 
 export function announce(text) {
+  silence();
+  pending = setTimeout(() => (node.textContent = text), CLEAR_MS);
+}
+
+export function silence() {
   node ??= $("announcer");
   clearTimeout(pending);
   node.textContent = "";
-  pending = setTimeout(() => (node.textContent = text), CLEAR_MS);
 }

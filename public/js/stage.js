@@ -1,4 +1,4 @@
-import { announce } from "./announce.js";
+import { announce, silence } from "./announce.js";
 import { loadCssOnce } from "./css-loader.js";
 import { stage } from "./dom.js";
 import { el } from "./el.js";
@@ -49,6 +49,7 @@ export function restartExhibit() {
 
 function clear() {
   live?.abort();
+  silence();
   stage.replaceChildren();
   return (live = new AbortController()).signal;
 }
