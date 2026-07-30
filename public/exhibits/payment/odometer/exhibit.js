@@ -144,7 +144,7 @@ export function mount(root, api) {
 
   function touch() {
     stopDecay();
-    if (isSettled(state, state.place)) return;
+    if (isSettled(state, state.place) || state.pending === 0) return;
     idleTimer = setTimeout(startDecay, IDLE_MS);
   }
 
