@@ -41,8 +41,8 @@ export function mount(root, api) {
         el("span", { class: "slot-num", text: String(cell % LAP) }),
       ),
     );
-    const window = el("span", { class: "slot-window", "aria-hidden": true }, strip);
-    return { hold, strip, node: el("label", { class: "slot-reel" }, hold, window) };
+    const face = el("span", { class: "slot-window", "aria-hidden": true }, strip);
+    return { hold, strip, node: el("label", { class: "slot-reel" }, hold, face) };
   });
 
   const spinBtn = el("button", {
