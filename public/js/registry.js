@@ -10,6 +10,8 @@
 // An entry marked `soon` is announced but not built: it has no directory, and
 // nothing routes to it.
 
+export const CRUELTY_MAX = 5;
+
 export const CATEGORIES = [
   {
     id: "payment",

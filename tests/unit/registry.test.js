@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 
 import {
   CATEGORIES,
+  CRUELTY_MAX,
   exhibitAsset,
   isBuilt,
   lookup,
@@ -39,7 +40,10 @@ test("a built exhibit carries everything the wall label needs", () => {
   for (const { exhibit } of built) {
     assert.equal(typeof exhibit.label, "string");
     assert.ok(exhibit.blurb?.length > 20, `${exhibit.id} needs a blurb`);
-    assert.ok(Number.isInteger(exhibit.cruelty) && exhibit.cruelty >= 1 && exhibit.cruelty <= 5);
+    assert.ok(
+      Number.isInteger(exhibit.cruelty) && exhibit.cruelty >= 1 && exhibit.cruelty <= CRUELTY_MAX,
+      `${exhibit.id} rates its cruelty on the registry's scale`,
+    );
     assert.match(exhibit.added, /^\d{4}-\d{2}-\d{2}$/);
   }
 });
