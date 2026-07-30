@@ -37,6 +37,7 @@ An exhibit is one design idea carried across a whole form, so each item below sa
 15. **Site furniture** — `og-image.png` social card, favicons, `site.webmanifest`. Deferred until the visual identity has settled. `sitemap.xml` waits on something else: exhibits are addressed by fragment, so a crawler sees one URL and a sitemap would list it once.
 16. **A "how bad is it" measure** — the cruelty pips are hand-assigned. They could instead be derived from a recorded median completion time once there is traffic, which is a more honest number and a better joke.
 17. **Random exhibit button** — one keypress, one victim.
+18. **Donate your time to the collection** — the receipt grows one button that sends a single integer, how long that exhibit took, and nothing else: no identifier, no captured values, no second request. It is what turns #16's cruelty pips into a measured number and #13's hall of fame into a shared one. It is also the only thing that should ever soften the promise in the rail note, and only by asking: a museum inviting a donation is in character, a museum reading your pockets is not. `connect-src` opens for exactly that endpoint or it stays shut.
 
 ## Done
 
