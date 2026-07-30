@@ -15,11 +15,13 @@ Two consequences that are not negotiable:
 
 No build step. Native ES modules served as they are, plain CSS, zero runtime dependencies; `public/` is the deploy artifact and the web boundary — a file outside it is repository furniture and is never served, which is why the notes and the tooling sit at the root. Everything below is convention plus a test that makes the convention loud when it is broken.
 
-- [public/js/registry.js](public/js/registry.js) — the catalogue as pure data: `CATEGORIES`, each holding its exhibits' metadata. No imports, no side effects, importable in bare Node. Array order is display order.
-- [public/js/router.js](public/js/router.js) — `#/<category>/<exhibit>` and nothing else. `parseRoute`/`formatRoute` are pure; the DOM-facing half starts the listener and resolves an unknown route to the first exhibit via `replaceState`, so a stale link never lands on a blank page.
-- [public/js/stage.js](public/js/stage.js) — the exhibit lifecycle: abort the previous one, load its CSS once, dynamically import its module, mount it. An import failure renders a card in the stage and leaves the rest of the site working.
-- [public/js/session.js](public/js/session.js) — what the visitor has captured in the current exhibit, the clock, the attempt count. DOM-free, so it is unit-tested in bare Node. One direction only: values arrive through `setValue` and leave through subscribers; nothing reads back out of the DOM. A position an exhibit hasn't committed is the `BLANK` character, which is also what makes "complete" answerable for a control whose digits all start at zero.
-- [public/js/sidebar.js](public/js/sidebar.js), [public/js/tabs.js](public/js/tabs.js), [public/js/status.js](public/js/status.js) — the three views built from the registry and the session.
+The shell is [public/js/](public/js/), where the file names are the index and each module says what it is. What a directory listing can't tell you:
+
+- **The catalogue is data.** [registry.js](public/js/registry.js) holds every category and its exhibits' metadata and imports nothing; array order is display order, and an entry marked `soon` has no directory and nothing routes to it.
+- **The route is `#/<category>/<exhibit>` and nothing else.** Parsing and formatting are pure. Anything that doesn't name a built exhibit is corrected with `replaceState` rather than pushed, so a stale link neither lands on a blank page nor leaves a step in the history to walk back through, and an in-page anchor can't restart an exhibit halfway through it.
+- **The stage owns an exhibit's whole life.** It aborts the one on screen, loads the next one's stylesheet once, imports its module and mounts it; a failed import leaves a card in the stage and the rest of the site working. There is one teardown, and starting over goes through it.
+- **The session runs one way.** Values arrive through `setValue` and leave through subscribers; nothing reads back out of the DOM, and the module holds none, so what the form has captured is answerable outside a browser. A position an exhibit hasn't committed is the `BLANK` character, which is what makes "complete" answerable for a control whose digits all start at zero.
+- **A module that has no reason to touch the document doesn't.** Reading a global at the top of a file makes it browser-only for good, and the ones that stay out of the document are held there by a test.
 
 ### The exhibit contract
 
