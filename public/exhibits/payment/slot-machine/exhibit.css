@@ -46,6 +46,7 @@
 }
 
 [data-exhibit="payment/slot-machine"] .slot-reel {
+  position: relative;
   flex: none;
   cursor: pointer;
 }
