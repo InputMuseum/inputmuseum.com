@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readdirSync } from "node:fs";
+import { readFileSync, readdirSync, statSync } from "node:fs";
+import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { CATEGORIES, isBuilt } from "../../public/js/registry.js";
@@ -34,3 +35,34 @@ test("the DOM-free modules import in bare Node", async () => {
     assert.ok(Object.keys(module).length > 0, `${path} has exports`);
   }
 });
+
+// The modules that build the shell can only be imported by a browser, so a
+// mistyped path in one of them is a blank page rather than a failure here.
+// A text scan reaches them: the specifiers are written, not computed. The one
+// the stage builds at runtime is derived from ids, which the manifest checks.
+test("every import specifier names a file that is there", () => {
+  for (const file of allScripts()) {
+    const source = readFileSync(`${root}${file}`, "utf8");
+    for (const [, specifier] of source.matchAll(/\bfrom\s+"([^"]+)"/g)) {
+      assert.ok(specifier.startsWith("."), `${file} imports "${specifier}", which is not relative`);
+      const target = resolve(dirname(`${root}${file}`), specifier);
+      assert.ok(exists(target), `${file} imports "${specifier}", which is missing`);
+    }
+  }
+});
+
+function allScripts(path = "") {
+  return readdirSync(`${root}${path}`, { withFileTypes: true }).flatMap((entry) => {
+    const child = path ? `${path}/${entry.name}` : entry.name;
+    if (entry.isDirectory()) return allScripts(child);
+    return entry.name.endsWith(".js") ? [child] : [];
+  });
+}
+
+function exists(path) {
+  try {
+    return statSync(path).isFile();
+  } catch {
+    return false;
+  }
+}
