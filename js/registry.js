@@ -24,7 +24,14 @@ export const CATEGORIES = [
         cruelty: 4,
         added: "2026-07-29",
       },
-      { id: "slot-machine", label: "The Slot Machine", soon: true },
+      {
+        id: "slot-machine",
+        label: "The Slot Machine",
+        blurb:
+          "Entering a number is a chore; being shown one is a delight. The machine proposes twenty-three digits, you keep the ones you like, and it proposes again. Most visitors are finished well inside a hundred spins.",
+        cruelty: 5,
+        added: "2026-07-30",
+      },
       { id: "bureaucrat", label: "The Bureaucrat", soon: true },
     ],
   },

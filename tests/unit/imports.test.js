@@ -12,8 +12,11 @@ const PURE = [
   "js/session.js",
   "js/motion.js",
   "js/el.js",
+  "exhibits/payment/form.js",
   "exhibits/payment/odometer/digits.js",
   "exhibits/payment/odometer/exhibit.js",
+  "exhibits/payment/slot-machine/reels.js",
+  "exhibits/payment/slot-machine/exhibit.js",
 ];
 
 test("the DOM-free modules import in bare Node", async () => {
