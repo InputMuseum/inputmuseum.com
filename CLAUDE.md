@@ -36,7 +36,7 @@ The module path is **derived** — `public/exhibits/<category>/<exhibit>/exhibit
 
 **An exhibit is a whole form in one design language.** A category names a form its visitors have filled in before — payment details, personal information — and each exhibit under it is a competing design for *all* of that form: card number, expiry and security code together, not one apiece. Two exhibits in a category are alternatives, never halves. So a mechanism that only suits one field isn't an exhibit; it is one field of an exhibit whose idea reaches the others too, and if the idea doesn't reach them, it isn't the exhibit's idea.
 
-**The shell owns the form, the exhibit owns the input.** The captured values, the elapsed clock, the reset button, the submit gate and the receipt are written once in the shell and every exhibit inherits them by declaring `fields`. An exhibit that grows its own timer or its own submit button has taken something from the shell that the next exhibit will then have to re-implement.
+**The shell owns the form, the exhibit owns the input.** The captured values, the elapsed clock, the reset button, the submit gate and the receipt are written once in the shell and every exhibit inherits them by declaring `fields`. An exhibit that grows its own timer or its own submit button has taken something from the shell that the next exhibit will then have to re-implement. Starting over is a teardown and a fresh `mount` rather than a message, so an exhibit may keep the visitor's progress wherever it likes and has nothing to reset.
 
 ### CSS scoping
 

@@ -1,7 +1,8 @@
 import { announce } from "./announce.js";
 import { receipt, receiptBody, resetBtn, statusClock, statusFields, submitBtn } from "./dom.js";
 import { el } from "./el.js";
-import { BLANK, restartSession, snapshot, subscribe } from "./session.js";
+import { BLANK, snapshot, subscribe } from "./session.js";
+import { restartExhibit } from "./stage.js";
 
 const TICK_MS = 1000;
 
@@ -9,7 +10,7 @@ export function initStatus() {
   subscribe(render);
   setInterval(renderClock, TICK_MS);
   resetBtn.addEventListener("click", () => {
-    restartSession();
+    restartExhibit();
     announce("Cleared. Start again.");
   });
   submitBtn.addEventListener("click", showReceipt);

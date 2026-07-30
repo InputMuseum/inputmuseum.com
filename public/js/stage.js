@@ -3,15 +3,14 @@ import { loadCssOnce } from "./css-loader.js";
 import { stage } from "./dom.js";
 import { el } from "./el.js";
 import { exhibitAsset } from "./registry.js";
-import { beginSession, setValue } from "./session.js";
+import { beginSession, restartSession, setValue } from "./session.js";
 
 let live = null;
+let showing = null;
 
 export async function showExhibit(category, exhibit) {
-  live?.abort();
-  const { signal } = (live = new AbortController());
-
-  stage.replaceChildren();
+  const signal = clear();
+  showing = null;
   stage.dataset.exhibit = `${category.id}/${exhibit.id}`;
 
   const url = (file) =>
@@ -28,9 +27,30 @@ export async function showExhibit(category, exhibit) {
   }
   if (signal.aborted) return;
 
+  showing = module;
   beginSession(module.fields);
-  module.mount(stage, { set: setValue, announce, signal });
+  mount(module, signal);
 }
+
+// An exhibit holds what the visitor has done to it in its own closure, so
+// starting over builds it again rather than asking it to undo itself.
+export function restartExhibit() {
+  if (!showing) {
+    restartSession();
+    return;
+  }
+  const signal = clear();
+  restartSession();
+  mount(showing, signal);
+}
+
+function clear() {
+  live?.abort();
+  stage.replaceChildren();
+  return (live = new AbortController()).signal;
+}
+
+const mount = (module, signal) => module.mount(stage, { set: setValue, announce, signal });
 
 const failureCard = () =>
   el(
