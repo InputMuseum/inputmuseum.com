@@ -45,12 +45,12 @@ export function mount(root, api) {
     ),
   );
 
-  const [number, expiry, code] = sliceFields(cells);
+  const [first, ...rest] = sliceFields(cells);
   const readout = el(
     "div",
     { class: "odo-readout", role: "img" },
-    number,
-    el("div", { class: "odo-pair" }, expiry, code),
+    first,
+    el("div", { class: "odo-pair" }, ...rest),
   );
 
   const placeInput = el("input", {

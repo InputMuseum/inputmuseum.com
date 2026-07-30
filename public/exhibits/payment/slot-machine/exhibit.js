@@ -51,13 +51,13 @@ export function mount(root, api) {
     text: "Spin",
   });
   const tally = el("p", { class: "slot-tally" });
-  const [number, expiry, code] = banks();
+  const [first, ...rest] = banks();
 
   root.append(
     el(
       "div",
       { class: "plinth slot" },
-      el("div", { class: "slot-board" }, number, el("div", { class: "slot-pair" }, expiry, code)),
+      el("div", { class: "slot-board" }, first, el("div", { class: "slot-pair" }, ...rest)),
       el("div", { class: "slot-actions" }, spinBtn, tally),
       el("p", {
         class: "slot-hint",
