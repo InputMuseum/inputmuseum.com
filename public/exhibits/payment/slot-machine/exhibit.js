@@ -104,7 +104,7 @@ export function mount(root, api) {
     const rolls = [];
     reels.forEach(({ strip }, at) => {
       if (isHeld(state, at)) return;
-      rolls.push(roll(strip, before.digits[at], state.digits[at], at * STAGGER_MS));
+      rolls.push(roll(strip, before.digits[at], state.digits[at], duration(at * STAGGER_MS)));
       // the labels are the board for anyone not watching it, so they tell the
       // truth as soon as the truth is known
       label(at);
@@ -115,7 +115,7 @@ export function mount(root, api) {
     // A timer rather than the animations' own completion: a hidden tab never
     // ticks them, and the machine would come back from a switched-away spin
     // with nothing to press.
-    settleTimer = setTimeout(settle, (LENGTH - 1) * STAGGER_MS + duration(SPIN_MS), rolls);
+    settleTimer = setTimeout(settle, duration((LENGTH - 1) * STAGGER_MS + SPIN_MS), rolls);
   }
 
   function settle(rolls) {
