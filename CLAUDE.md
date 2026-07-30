@@ -50,8 +50,8 @@ Design tokens live in `:root` in [public/css/01-base.css](public/css/01-base.css
 
 ## Build & verify
 
-- `npm run lint` — ESLint over `public/js/` and `public/exhibits/`. There is no build step, so this is the only pre-runtime error check.
-- `npm test` — `node --test` over `tests/unit/`. Two of those tests guard conventions rather than behaviour: `imports.test.js` pins that the DOM-free modules stay importable in bare Node (no `window`/`document` at module top level), and `manifest.test.js` cross-checks the registry against the filesystem, the CSS scoping rule and the web boundary. A convention that can be violated silently gets a test; that is the general rule here, not those two cases.
+- `npm run lint` — ESLint over every JavaScript file in the repository. There is no build step, so this is the only pre-runtime error check the code gets, and it doesn't resolve an import for you.
+- `npm test` — `node --test`, which discovers the suite wherever it sits. Part of it guards conventions rather than behaviour: the web boundary, the CSS scoping rule, the registry against the filesystem, the breakpoint the layout shares with the shell. A convention that can be violated silently gets a test rather than a sentence in this file.
 - `npm run format:check` — CI runs it, so formatter drift cannot accumulate.
 - Serve with `python3 -m http.server -d public` from the repo root. Do not start a server on the user's behalf without being asked.
 
