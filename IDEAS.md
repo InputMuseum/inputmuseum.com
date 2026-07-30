@@ -38,6 +38,7 @@ An exhibit is one design idea carried across a whole form, so each item below sa
 16. **A "how bad is it" measure** — the cruelty pips are hand-assigned. They could instead be derived from a recorded median completion time once there is traffic, which is a more honest number and a better joke.
 17. **Random exhibit button** — one keypress, one victim.
 18. **Donate your time to the collection** — the receipt grows one button that sends a single integer, how long that exhibit took, and nothing else: no identifier, no captured values, no second request. It is what turns #16's cruelty pips into a measured number and #13's hall of fame into a shared one. It is also the only thing that should ever soften the promise in the rail note, and only by asking: a museum inviting a donation is in character, a museum reading your pockets is not. `connect-src` opens for exactly that endpoint or it stays shut.
+19. **A `LICENSE` file** — there is none, which is not a neutral state but the most restrictive one: default copyright, so the museum can be read and forked and nothing else. It gates any invitation to submit an exhibit and has to land before that does, because licensing a contribution after the fact stops being a decision one person can make.
 
 ## Done
 
