@@ -46,6 +46,21 @@ test("every built exhibit exports the contract the stage calls", async () => {
   }
 });
 
+// A category is a form and its exhibits are competing designs for the whole of
+// it, which is only true while they all capture the same thing.
+test("every exhibit in a category captures the same form", async () => {
+  for (const category of CATEGORIES) {
+    const rosters = [];
+    for (const exhibit of category.exhibits.filter((entry) => !entry.soon)) {
+      const module = await import(`../../${exhibitAsset(category.id, exhibit.id, "exhibit.js")}`);
+      rosters.push([exhibit.id, module.fields]);
+    }
+    const [firstId, first] = rosters[0] ?? [];
+    for (const [id, roster] of rosters.slice(1))
+      assert.deepEqual(roster, first, `${id} captures a different form from ${firstId}`);
+  }
+});
+
 test("an exhibit marked soon has nothing on disk yet", () => {
   for (const category of CATEGORIES)
     for (const exhibit of category.exhibits.filter((entry) => entry.soon)) {

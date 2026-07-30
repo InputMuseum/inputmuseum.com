@@ -14,14 +14,10 @@ import {
   spellOut,
   wheelDigit,
 } from "./digits.js";
+import { LENGTH, fields, slices } from "../form.js";
 
-export const fields = [
-  { name: "number", label: "Card number", length: 16, group: 4, benchmarkMs: 9000 },
-  { name: "expiry", label: "Expiry", length: 4, group: 2, benchmarkMs: 4000 },
-  { name: "code", label: "Security code", length: 3, group: 3, benchmarkMs: 3000 },
-];
+export { fields };
 
-const LENGTH = fields.reduce((total, field) => total + field.length, 0);
 const PLACES = placeNames(LENGTH);
 
 const ROLL_MS_PER_STEP = 55;
@@ -143,12 +139,7 @@ export function mount(root, api) {
   }
 
   function publish() {
-    const digits = report(state);
-    let from = 0;
-    for (const field of fields) {
-      api.set(field.name, digits.slice(from, from + field.length));
-      from += field.length;
-    }
+    for (const [field, digits] of slices(report(state))) api.set(field.name, digits);
   }
 
   function touch() {
@@ -200,14 +191,8 @@ export function mount(root, api) {
   }
 
   function describe() {
-    const digits = report(state);
-    let from = 0;
-    return fields
-      .map((field) => {
-        const said = spellOut(digits.slice(from, from + field.length));
-        from += field.length;
-        return `${field.label}: ${said}`;
-      })
+    return [...slices(report(state))]
+      .map(([field, digits]) => `${field.label}: ${spellOut(digits)}`)
       .join(". ");
   }
 
@@ -217,17 +202,14 @@ export function mount(root, api) {
 }
 
 function sliceFields(cells) {
-  let from = 0;
-  return fields.map((field) => {
-    const mine = cells.slice(from, from + field.length);
-    from += field.length;
-    return el(
+  return [...slices(cells)].map(([field, mine]) =>
+    el(
       "div",
       { class: "odo-field" },
       el("span", { class: "odo-field-label", text: field.label }),
       el("span", { class: "odo-wheels" }, ...grouped(mine, field.group)),
-    );
-  });
+    ),
+  );
 }
 
 function grouped(cells, size) {
