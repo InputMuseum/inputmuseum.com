@@ -28,9 +28,13 @@ The shell is [public/js/](public/js/), where the file names are the index and ea
 An exhibit is a directory holding `exhibit.js`, `exhibit.css`, and whatever pure logic it factors out. `exhibit.js` exports exactly two things:
 
 ```js
-export const fields = [{ name: "number", label: "Card number", length: 16, group: 4 }];
+export const fields = [
+  { name: "number", label: "Card number", length: 16, group: 4, benchmarkMs: 9000 },
+];
 export function mount(root, api) {}
 ```
+
+`name` and `label` are what the shell captures under and calls it; `length` is the width it blanks and answers "complete" against, and a field without one completes as soon as it says anything. `group` is how the strip and the receipt chunk the value for reading. `benchmarkMs` is how long that field takes in a form you can type into — the receipt totals them for its comparison line and leaves the line out when nothing declares one.
 
 `api` is `{ set(name, value), announce(text), signal }`. `signal` is aborted when the exhibit is torn down, so a listener registered with `{ signal }` and an animation loop that checks `signal.aborted` both clean themselves up — an exhibit needs no teardown bookkeeping of its own, and `mount` returns nothing. The contract is deliberately this small; widen it when a second exhibit proves it must, not in anticipation of one.
 
