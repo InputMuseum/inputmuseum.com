@@ -8,7 +8,7 @@ export default [
   { ignores: ["node_modules/"] },
   js.configs.recommended,
   {
-    files: ["js/**/*.js", "exhibits/**/*.js", "eslint.config.js"],
+    files: ["public/js/**/*.js", "public/exhibits/**/*.js", "eslint.config.js"],
     languageOptions: {
       ecmaVersion: 2024,
       sourceType: "module",

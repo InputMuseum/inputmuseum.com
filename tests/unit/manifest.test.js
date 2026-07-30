@@ -3,9 +3,9 @@ import assert from "node:assert/strict";
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
-import { CATEGORIES, exhibitAsset } from "../../js/registry.js";
+import { CATEGORIES, exhibitAsset } from "../../public/js/registry.js";
 
-const root = fileURLToPath(new URL("../../", import.meta.url));
+const root = fileURLToPath(new URL("../../public/", import.meta.url));
 const at = (path) => `${root}${path}`;
 const exists = (path) => {
   try {
@@ -35,7 +35,9 @@ test("every built exhibit has the two files the stage loads", () => {
 
 test("every built exhibit exports the contract the stage calls", async () => {
   for (const { categoryId, exhibitId } of built) {
-    const module = await import(`../../${exhibitAsset(categoryId, exhibitId, "exhibit.js")}`);
+    const module = await import(
+      `../../public/${exhibitAsset(categoryId, exhibitId, "exhibit.js")}`
+    );
     assert.ok(Array.isArray(module.fields), `${exhibitId} exports a fields array`);
     assert.ok(module.fields.length > 0, `${exhibitId} captures at least one field`);
     assert.equal(typeof module.mount, "function", `${exhibitId} exports mount`);
@@ -52,7 +54,9 @@ test("every exhibit in a category captures the same form", async () => {
   for (const category of CATEGORIES) {
     const rosters = [];
     for (const exhibit of category.exhibits.filter((entry) => !entry.soon)) {
-      const module = await import(`../../${exhibitAsset(category.id, exhibit.id, "exhibit.js")}`);
+      const module = await import(
+        `../../public/${exhibitAsset(category.id, exhibit.id, "exhibit.js")}`
+      );
       rosters.push([exhibit.id, module.fields]);
     }
     const [firstId, first] = rosters[0] ?? [];
@@ -77,6 +81,21 @@ test("nothing sits under exhibits/ that the registry doesn't list", () => {
         listed.has(`${categoryId}/${exhibitId}`),
         `exhibits/${categoryId}/${exhibitId} has no registry entry`,
       );
+});
+
+// The boundary is silent when it breaks: a note that lands inside the artifact
+// is published at a URL, and nothing about the site stops working to say so.
+test("no repository note sits inside the deploy artifact", () => {
+  const strays = [];
+  const walk = (path = "") => {
+    for (const entry of readdirSync(at(path), { withFileTypes: true })) {
+      const child = path ? `${path}/${entry.name}` : entry.name;
+      if (entry.isDirectory()) walk(child);
+      else if (entry.name.endsWith(".md")) strays.push(child);
+    }
+  };
+  walk();
+  assert.deepEqual(strays, [], `${strays.join(", ")} would be served`);
 });
 
 test("every exhibit rule is scoped to its own exhibit", () => {

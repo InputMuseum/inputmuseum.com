@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { formatRoute, parseRoute } from "../../js/router.js";
+import { formatRoute, parseRoute } from "../../public/js/router.js";
 
 test("a route round-trips through format and parse", () => {
   const route = { category: "payment", exhibit: "odometer" };

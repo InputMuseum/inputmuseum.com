@@ -1,8 +1,14 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { CATEGORIES, exhibitAsset, isBuilt, lookup, openingRoute } from "../../js/registry.js";
-import { parseRoute } from "../../js/router.js";
+import {
+  CATEGORIES,
+  exhibitAsset,
+  isBuilt,
+  lookup,
+  openingRoute,
+} from "../../public/js/registry.js";
+import { parseRoute } from "../../public/js/router.js";
 
 const every = CATEGORIES.flatMap((category) =>
   category.exhibits.map((exhibit) => ({ category, exhibit })),

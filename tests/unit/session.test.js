@@ -9,7 +9,7 @@ import {
   setValue,
   snapshot,
   subscribe,
-} from "../../js/session.js";
+} from "../../public/js/session.js";
 
 const CARD = [{ name: "number", label: "Card number", length: 16, group: 4 }];
 

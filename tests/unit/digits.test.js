@@ -1,8 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { BLANK } from "../../js/session.js";
-import { fields } from "../../exhibits/payment/odometer/exhibit.js";
+import { BLANK } from "../../public/js/session.js";
+import { fields } from "../../public/exhibits/payment/odometer/exhibit.js";
 import {
   commitPlace,
   decayPending,
@@ -15,7 +15,7 @@ import {
   setPending,
   spellOut,
   wheelDigit,
-} from "../../exhibits/payment/odometer/digits.js";
+} from "../../public/exhibits/payment/odometer/digits.js";
 
 const LENGTH = fields.reduce((total, field) => total + field.length, 0);
 const fresh = () => emptyState(LENGTH);

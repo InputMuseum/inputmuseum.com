@@ -21,7 +21,7 @@ const PURE = [
 
 test("the DOM-free modules import in bare Node", async () => {
   for (const path of PURE) {
-    const module = await import(`../../${path}`);
+    const module = await import(`../../public/${path}`);
     assert.ok(Object.keys(module).length > 0, `${path} has exports`);
   }
 });

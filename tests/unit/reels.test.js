@@ -1,8 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { BLANK } from "../../js/session.js";
-import { LENGTH } from "../../exhibits/payment/form.js";
+import { BLANK } from "../../public/js/session.js";
+import { LENGTH } from "../../public/exhibits/payment/form.js";
 import {
   MAX_DIGIT,
   emptyState,
@@ -12,7 +12,7 @@ import {
   spin,
   spinnable,
   toggleHold,
-} from "../../exhibits/payment/slot-machine/reels.js";
+} from "../../public/exhibits/payment/slot-machine/reels.js";
 
 // Randomness arrives as an argument, so a spin can be told exactly what to land.
 const lands = (...digits) => {

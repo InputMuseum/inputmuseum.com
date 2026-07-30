@@ -13,13 +13,13 @@ Two consequences that are not negotiable:
 
 ## Architecture
 
-No build step. Native ES modules served as they are, plain CSS, zero runtime dependencies; the repository root is the deploy artifact. Everything below is convention plus a test that makes the convention loud when it is broken.
+No build step. Native ES modules served as they are, plain CSS, zero runtime dependencies; `public/` is the deploy artifact and the web boundary — a file outside it is repository furniture and is never served, which is why the notes and the tooling sit at the root. Everything below is convention plus a test that makes the convention loud when it is broken.
 
-- [js/registry.js](js/registry.js) — the catalogue as pure data: `CATEGORIES`, each holding its exhibits' metadata. No imports, no side effects, importable in bare Node. Array order is display order.
-- [js/router.js](js/router.js) — `#/<category>/<exhibit>` and nothing else. `parseRoute`/`formatRoute` are pure; the DOM-facing half starts the listener and resolves an unknown route to the first exhibit via `replaceState`, so a stale link never lands on a blank page.
-- [js/stage.js](js/stage.js) — the exhibit lifecycle: abort the previous one, load its CSS once, dynamically import its module, mount it. An import failure renders a card in the stage and leaves the rest of the site working.
-- [js/session.js](js/session.js) — what the visitor has captured in the current exhibit, the clock, the attempt count. DOM-free, so it is unit-tested in bare Node. One direction only: values arrive through `setValue` and leave through subscribers; nothing reads back out of the DOM. A position an exhibit hasn't committed is the `BLANK` character, which is also what makes "complete" answerable for a control whose digits all start at zero.
-- [js/sidebar.js](js/sidebar.js), [js/tabs.js](js/tabs.js), [js/status.js](js/status.js) — the three views built from the registry and the session.
+- [public/js/registry.js](public/js/registry.js) — the catalogue as pure data: `CATEGORIES`, each holding its exhibits' metadata. No imports, no side effects, importable in bare Node. Array order is display order.
+- [public/js/router.js](public/js/router.js) — `#/<category>/<exhibit>` and nothing else. `parseRoute`/`formatRoute` are pure; the DOM-facing half starts the listener and resolves an unknown route to the first exhibit via `replaceState`, so a stale link never lands on a blank page.
+- [public/js/stage.js](public/js/stage.js) — the exhibit lifecycle: abort the previous one, load its CSS once, dynamically import its module, mount it. An import failure renders a card in the stage and leaves the rest of the site working.
+- [public/js/session.js](public/js/session.js) — what the visitor has captured in the current exhibit, the clock, the attempt count. DOM-free, so it is unit-tested in bare Node. One direction only: values arrive through `setValue` and leave through subscribers; nothing reads back out of the DOM. A position an exhibit hasn't committed is the `BLANK` character, which is also what makes "complete" answerable for a control whose digits all start at zero.
+- [public/js/sidebar.js](public/js/sidebar.js), [public/js/tabs.js](public/js/tabs.js), [public/js/status.js](public/js/status.js) — the three views built from the registry and the session.
 
 ### The exhibit contract
 
@@ -32,7 +32,7 @@ export function mount(root, api) {}
 
 `api` is `{ set(name, value), announce(text), signal }`. `signal` is aborted when the exhibit is torn down, so a listener registered with `{ signal }` and an animation loop that checks `signal.aborted` both clean themselves up — an exhibit needs no teardown bookkeeping of its own, and `mount` returns nothing. The contract is deliberately this small; widen it when a second exhibit proves it must, not in anticipation of one.
 
-The module path is **derived** — `exhibits/<category>/<exhibit>/exhibit.js` — never stored in the registry, so it cannot drift from where the file actually is.
+The module path is **derived** — `public/exhibits/<category>/<exhibit>/exhibit.js` — never stored in the registry, so it cannot drift from where the file actually is.
 
 **An exhibit is a whole form in one design language.** A category names a form its visitors have filled in before — payment details, personal information — and each exhibit under it is a competing design for *all* of that form: card number, expiry and security code together, not one apiece. Two exhibits in a category are alternatives, never halves. So a mechanism that only suits one field isn't an exhibit; it is one field of an exhibit whose idea reaches the others too, and if the idea doesn't reach them, it isn't the exhibit's idea.
 
@@ -42,16 +42,16 @@ The module path is **derived** — `exhibits/<category>/<exhibit>/exhibit.js` �
 
 Every rule in an `exhibit.css` is scoped under `[data-exhibit="<category>/<exhibit>"]`, which the stage stamps on its container; classes inside carry a short id prefix (`.odo-*`). With no bundler there is nothing else standing between two exhibits' stylesheets, and `tests/unit/manifest.test.js` fails on a selector that escapes its own scope.
 
-Shell CSS is a set of numbered partials linked in [index.html](index.html) in cascade order. **The `<link>` order is the cascade** — adding a partial means putting its link where its rules belong, not next to its neighbours in the directory listing. Exhibit stylesheets are not linked; [js/css-loader.js](js/css-loader.js) injects them on first use.
+Shell CSS is a set of numbered partials linked in [public/index.html](public/index.html) in cascade order. **The `<link>` order is the cascade** — adding a partial means putting its link where its rules belong, not next to its neighbours in the directory listing. Exhibit stylesheets are not linked; [public/js/css-loader.js](public/js/css-loader.js) injects them on first use.
 
-Design tokens live in `:root` in [css/01-base.css](css/01-base.css). Anything that needs to compose with alpha ships a paired `--x-rgb` triplet next to it. The palette is dark-only for now, but the tokens are named by role rather than by shade so a light appearance can arrive as one additive partial without touching a component rule.
+Design tokens live in `:root` in [public/css/01-base.css](public/css/01-base.css). Anything that needs to compose with alpha ships a paired `--x-rgb` triplet next to it. The palette is dark-only for now, but the tokens are named by role rather than by shade so a light appearance can arrive as one additive partial without touching a component rule.
 
 ## Build & verify
 
-- `npm run lint` — ESLint over `js/` and `exhibits/`. There is no build step, so this is the only pre-runtime error check.
-- `npm test` — `node --test` over `tests/unit/`. Two of those tests guard conventions rather than behaviour: `imports.test.js` pins that the DOM-free modules stay importable in bare Node (no `window`/`document` at module top level), and `manifest.test.js` cross-checks the registry against the filesystem and the CSS scoping rule. A convention that can be violated silently gets a test; that is the general rule here, not those two cases.
+- `npm run lint` — ESLint over `public/js/` and `public/exhibits/`. There is no build step, so this is the only pre-runtime error check.
+- `npm test` — `node --test` over `tests/unit/`. Two of those tests guard conventions rather than behaviour: `imports.test.js` pins that the DOM-free modules stay importable in bare Node (no `window`/`document` at module top level), and `manifest.test.js` cross-checks the registry against the filesystem, the CSS scoping rule and the web boundary. A convention that can be violated silently gets a test; that is the general rule here, not those two cases.
 - `npm run format:check` — CI runs it, so formatter drift cannot accumulate.
-- Serve with `python3 -m http.server` at the repo root. Do not start a server on the user's behalf without being asked.
+- Serve with `python3 -m http.server -d public` from the repo root. Do not start a server on the user's behalf without being asked.
 
 ## Conventions
 
