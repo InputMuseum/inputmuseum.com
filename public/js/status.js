@@ -65,7 +65,6 @@ function showReceipt() {
       : null,
   );
   receipt.showModal();
-  announce(`Captured in ${spell(elapsedMs)}.`);
 }
 
 function group(field, value = "") {
