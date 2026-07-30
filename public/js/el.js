@@ -1,6 +1,6 @@
-// The element builder everything constructs its DOM with. Kept apart from the
-// shell's cached references so that importing it costs nothing — an exhibit
-// module reaches for this and stays readable outside a browser.
+// The element builder everything constructs its DOM with. It caches nothing
+// and reads nothing from the document, so importing it costs no environment
+// and only calling it needs one.
 
 export function el(tag, attrs = {}, ...children) {
   const node = document.createElement(tag);

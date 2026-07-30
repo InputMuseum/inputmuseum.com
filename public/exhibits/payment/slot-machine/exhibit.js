@@ -17,8 +17,8 @@ export { fields };
 const CELL_EM = 1.6;
 const LAP = MAX_DIGIT + 1;
 const SPIN_MS = 450;
-// Reels settle left to right. Sixty spins is a normal visit, so the whole
-// sequence has to land inside a second.
+// Reels settle left to right, and a visit is a great many spins, so the whole
+// sequence has to land well inside a second.
 const STAGGER_MS = 18;
 const EASING = "cubic-bezier(0.1, 0.4, 0.15, 1)";
 

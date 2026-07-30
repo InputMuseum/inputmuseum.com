@@ -1,5 +1,5 @@
 // The machine's state, as values. No DOM, and randomness arrives as an
-// argument, so a spin can be replayed exactly in a test.
+// argument, so a spin can be replayed exactly.
 //
 // A held reel is a committed digit; everything else is whatever the last spin
 // left there and counts for nothing.

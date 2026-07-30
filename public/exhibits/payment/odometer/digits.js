@@ -1,5 +1,5 @@
 // The odometer's state, as values. No DOM, so the machine can be reasoned
-// about in a test rather than by dragging sliders twenty-three times.
+// about without dragging a slider twenty-three times.
 //
 // A place is settled once it has been committed; until then the visitor is
 // only ever editing `pending`, and leaving the place throws that work away.

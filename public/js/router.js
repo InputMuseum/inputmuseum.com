@@ -1,5 +1,5 @@
-// #/<category>/<exhibit>, and nothing else. Kept importable in bare Node for
-// the unit tests, so nothing here touches the DOM until it is called.
+// #/<category>/<exhibit>, and nothing else. Nothing here touches the DOM until
+// it is called, so reading a route costs no environment.
 
 const ROUTE = /^#?\/([a-z0-9-]+)\/([a-z0-9-]+)\/?$/;
 

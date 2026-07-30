@@ -16,8 +16,7 @@ export function markTabs(exhibitId) {
       continue;
     }
     tab.setAttribute("aria-current", "page");
-    // once a category runs to a dozen exhibits the current one is often off
-    // the end of the strip
+    // the strip scrolls, so the current tab can be sitting outside it
     tab.scrollIntoView({
       behavior: prefersReducedMotion() ? "auto" : "smooth",
       block: "nearest",

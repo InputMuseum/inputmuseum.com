@@ -1,7 +1,7 @@
 // The catalogue. Metadata only — an exhibit's behavior lives in its own
 // directory and is loaded when someone opens it.
-// Environment-free on purpose: this module must stay importable outside the
-// browser (the unit tests run it in bare Node).
+// Environment-free on purpose: nothing here reads a global, so it stays
+// importable outside a browser.
 //
 // A category is a form its visitors have filled in before; its exhibits are
 // competing designs for that whole form, so they sit beside each other as
