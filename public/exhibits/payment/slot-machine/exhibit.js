@@ -153,7 +153,7 @@ export function mount(root, api) {
   }
 
   function paintChrome() {
-    spinBtn.disabled = !spinnable(state) || settling > 0;
+    spinBtn.disabled = !spinnable(state) || settling;
     tally.textContent =
       `${heldCount(state)} of ${LENGTH} held` +
       (spins ? ` · ${spins} spin${spins === 1 ? "" : "s"}` : "");
