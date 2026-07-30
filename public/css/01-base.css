@@ -5,6 +5,11 @@
   --line: #2a2e37;
   --text: #e6e8ee;
   --dim: #8b909c;
+  --faint: #6b7079;
+  --ghost: #5f646e;
+  --ghost-dim: #4c505a;
+  --line-strong: #4a4e57;
+  --on-accent: #16130c;
   /* the brass of an engraved wall label; paired triplet so it composes with alpha */
   --accent-rgb: 210, 172, 106;
   --accent: rgb(var(--accent-rgb));
@@ -93,7 +98,7 @@ a {
   padding: 10px 16px;
   border-radius: 6px;
   background: var(--accent);
-  color: #16130c;
+  color: var(--on-accent);
   font-weight: 600;
   transform: translateY(-200%);
 }

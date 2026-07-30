@@ -48,14 +48,14 @@ a.tab:hover {
 }
 
 .tab-soon {
-  color: #5f646e;
+  color: var(--ghost);
 }
 
 .badge {
   padding: 1px 6px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  color: #6b7079;
+  color: var(--faint);
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.08em;

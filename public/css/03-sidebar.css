@@ -56,15 +56,15 @@ a.rail-item:hover {
 }
 
 .rail-soon .rail-label {
-  color: #5f646e;
+  color: var(--ghost);
 }
 
 .rail-soon .rail-count {
-  color: #4c505a;
+  color: var(--ghost-dim);
 }
 
 .rail-note {
-  color: #5f646e;
+  color: var(--ghost);
   font-size: 11px;
   line-height: 1.45;
   padding: 0 12px;

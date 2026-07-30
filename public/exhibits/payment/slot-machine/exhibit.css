@@ -119,7 +119,7 @@
 }
 
 [data-exhibit="payment/slot-machine"] .slot-hint {
-  color: #6b7079;
+  color: var(--faint);
   font-size: 12px;
   line-height: 1.45;
 }

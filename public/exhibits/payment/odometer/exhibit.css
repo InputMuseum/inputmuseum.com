@@ -113,7 +113,7 @@
 }
 
 [data-exhibit="payment/odometer"] .odo-end {
-  color: #6b7079;
+  color: var(--faint);
 }
 
 [data-exhibit="payment/odometer"] .odo-end:last-child {
@@ -151,7 +151,7 @@
 }
 
 [data-exhibit="payment/odometer"] .odo-hint {
-  color: #6b7079;
+  color: var(--faint);
   font-size: 12px;
   line-height: 1.45;
 }
