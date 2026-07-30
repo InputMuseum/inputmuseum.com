@@ -38,7 +38,7 @@ function show(target) {
   if (category !== shown?.category) buildTabs(category);
   markTabs(exhibit.id);
   fillPlaque(exhibit);
-  document.title = `${exhibit.label} — Bad Designs`;
+  document.title = `${exhibit.label} — The Input Museum`;
   shown = target;
   showExhibit(category, exhibit);
 }

@@ -1,8 +1,8 @@
-# Bad Designs
+# The Input Museum
 
-A gallery of input designs that work perfectly and are terrible to use.
+A collection of input designs that work perfectly and are terrible to use.
 
-Every exhibit is a real, working control that captures a real value — a card number, a date of birth, a phone number. None of them are broken. They are simply designed by someone who has never had to fill in a form and never will. The chrome around them is the opposite: a quiet museum that is fast, keyboard-operable and accessible, because the joke only lands if the building itself is well made.
+Every exhibit is a real, working control that captures a real value — a card number, a date of birth, a phone number. None of them are broken. They are simply designed by someone who has never had to fill in a form and never will. The building around them is the opposite: quiet, fast, keyboard-operable and accessible, because the joke only lands if the museum itself is well made.
 
 Nothing you type is transmitted anywhere. There is no server, no analytics and no storage — the values you enter live in a JavaScript object until you close the tab.
 

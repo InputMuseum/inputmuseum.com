@@ -34,7 +34,7 @@ An exhibit is one design idea carried across a whole form, so each item below sa
 12. **Exhibit permalinks that restore state** — `#/payment/odometer?v=…` so a visitor can show someone how far they got. Needs a serialisation the session owns, not the exhibit.
 13. **A hall of fame** — fastest completion per exhibit, kept in `localStorage`, purely local. The comparison line ("industry average: 9 seconds") in the receipt is the seed of this.
 14. **What's New panel** — a curated `changelog.json` feed, like OddworldMap's. Worth it once the exhibit count justifies a visit for "what changed".
-15. **Site furniture** — `CNAME` (baddesigns.org), `og-image.png` social card, favicons, `site.webmanifest`, `robots.txt`, `sitemap.xml`. Deferred until the name and the visual identity have settled.
+15. **Site furniture** — `CNAME` (inputmuseum.com), `og-image.png` social card, favicons, `site.webmanifest`, `robots.txt`, `sitemap.xml`. Deferred until the visual identity has settled.
 16. **A "how bad is it" measure** — the cruelty pips are hand-assigned. They could instead be derived from a recorded median completion time once there is traffic, which is a more honest number and a better joke.
 17. **Random exhibit button** — one keypress, one victim.
 
