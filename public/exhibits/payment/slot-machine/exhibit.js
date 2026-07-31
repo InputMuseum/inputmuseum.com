@@ -50,7 +50,7 @@ export function mount(root, api) {
     type: "button",
     text: "Spin",
   });
-  const tally = el("p", { class: "slot-tally" });
+  const tally = el("p", { class: "tally" });
   const [first, ...rest] = banks();
 
   root.append(
@@ -58,9 +58,9 @@ export function mount(root, api) {
       "div",
       { class: "plinth slot" },
       el("div", { class: "slot-board" }, first, el("div", { class: "slot-pair" }, ...rest)),
-      el("div", { class: "slot-actions" }, spinBtn, tally),
+      el("div", { class: "actions slot-actions" }, spinBtn, tally),
       el("p", {
-        class: "slot-hint",
+        class: "hint",
         text: "Tip: hold any reel that has landed correctly, wherever it is. There is no need to work left to right.",
       }),
     ),

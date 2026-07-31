@@ -75,7 +75,7 @@ export function mount(root, api) {
   });
 
   const setBtn = el("button", { class: "btn btn-primary odo-set", type: "button" });
-  const tally = el("p", { class: "odo-tally" });
+  const tally = el("p", { class: "tally" });
 
   root.append(
     el(
@@ -88,9 +88,9 @@ export function mount(root, api) {
         control("Place value", placeInput, placeName, [PLACES.at(0), PLACES.at(-1)]),
         control("Digit", digitInput, null, [String(MAX_DIGIT), "0"]),
       ),
-      el("div", { class: "odo-actions" }, setBtn, tally),
+      el("div", { class: "actions" }, setBtn, tally),
       el("p", {
-        class: "odo-hint",
+        class: "hint",
         text: "The place-value selector returns to the top after every digit, so you never lose your place.",
       }),
     ),
