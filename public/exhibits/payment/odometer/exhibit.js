@@ -206,7 +206,7 @@ function sliceFields(cells) {
     el(
       "div",
       { class: "odo-field" },
-      el("span", { class: "odo-field-label", text: field.label }),
+      el("span", { class: "eyebrow", text: field.label }),
       el("span", { class: "odo-wheels" }, ...grouped(mine, field.group)),
     ),
   );
@@ -223,7 +223,7 @@ function control(label, input, output, [left, right]) {
   return el(
     "div",
     { class: "odo-control" },
-    el("label", { class: "odo-label", for: input.id, text: label }),
+    el("label", { class: "eyebrow", for: input.id, text: label }),
     el(
       "div",
       { class: "odo-track" },

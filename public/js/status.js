@@ -25,7 +25,7 @@ function render() {
       return el(
         "div",
         { class: "st-field" },
-        el("span", { class: "st-label", text: field.label }),
+        el("span", { class: "eyebrow st-label", text: field.label }),
         el("output", {
           class: value.includes(BLANK) ? "st-value is-empty" : "st-value",
           text: group(field, value),
@@ -50,7 +50,7 @@ function showReceipt() {
       el(
         "div",
         { class: "rc-field" },
-        el("span", { class: "st-label", text: field.label }),
+        el("span", { class: "eyebrow st-label", text: field.label }),
         el("strong", { text: group(field, values.get(field.name)) }),
       ),
     ),

@@ -127,6 +127,16 @@ a {
   outline: none;
 }
 
+/* The small uppercase caption over a field, a control, or a run of either.
+   Colour and size stay with the surface: the plaque's is dimmer and the status
+   strip's shrinks on a phone. */
+.eyebrow {
+  color: var(--dim);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
 .btn {
   padding: 7px 14px;
   border: 1px solid var(--line);

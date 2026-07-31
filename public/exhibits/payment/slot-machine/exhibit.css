@@ -26,10 +26,6 @@
 [data-exhibit="payment/slot-machine"] .slot-legend {
   padding: 0;
   margin-bottom: 6px;
-  color: var(--dim);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
 }
 
 [data-exhibit="payment/slot-machine"] .slot-reels {

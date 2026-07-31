@@ -177,7 +177,7 @@ export function mount(root, api) {
       el(
         "fieldset",
         { class: "slot-field" },
-        el("legend", { class: "slot-legend", text: field.label }),
+        el("legend", { class: "eyebrow slot-legend", text: field.label }),
         el(
           "div",
           { class: "slot-reels" },

@@ -75,13 +75,6 @@
   gap: 1px;
 }
 
-.st-label {
-  color: var(--dim);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
-}
-
 .st-value {
   font-family: var(--mono);
   font-size: 15px;

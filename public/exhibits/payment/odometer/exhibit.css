@@ -21,13 +21,6 @@
   gap: 6px;
 }
 
-[data-exhibit="payment/odometer"] .odo-field-label {
-  color: var(--dim);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
-}
-
 [data-exhibit="payment/odometer"] .odo-wheels {
   display: flex;
   gap: 0.55em;
@@ -93,13 +86,6 @@
   grid-template-columns: 84px minmax(0, 1fr);
   align-items: center;
   gap: 6px 14px;
-}
-
-[data-exhibit="payment/odometer"] .odo-label {
-  color: var(--dim);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
 }
 
 /* Fixed end columns rather than intrinsic ones, so the two sliders line up

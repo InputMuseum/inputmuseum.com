@@ -26,9 +26,6 @@
   gap: 8px;
   margin-top: 12px;
   color: var(--faint);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
 }
 
 .pips {
