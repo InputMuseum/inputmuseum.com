@@ -80,7 +80,7 @@ a.rail-item:hover {
     top: 0;
     bottom: 0;
     left: 0;
-    z-index: 20;
+    z-index: var(--z-rail);
     width: var(--rail-w);
     transform: translateX(-100%);
     transition: transform 0.22s var(--ease);
@@ -94,7 +94,7 @@ a.rail-item:hover {
     display: block;
     position: fixed;
     inset: 0;
-    z-index: 10;
+    z-index: var(--z-scrim);
     background: rgba(0, 0, 0, 0.5);
   }
 

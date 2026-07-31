@@ -19,6 +19,14 @@
   --rail-w: 232px;
   --plaque-w: 62ch;
 
+  /* Low to high, so the order is the system: the scrim dims for the rail it
+     sits under, and the skip link outranks both because a focused one that
+     something covers is no way out at all. A modal <dialog> needs no tier —
+     showModal puts it in the top layer, above every one of these. */
+  --z-scrim: 10;
+  --z-rail: 20;
+  --z-skip: 100;
+
   --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, sans-serif;
   --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
@@ -102,7 +110,7 @@ a {
   position: fixed;
   top: 8px;
   left: 8px;
-  z-index: 100;
+  z-index: var(--z-skip);
   padding: 10px 16px;
   border-radius: 6px;
   background: var(--accent);
