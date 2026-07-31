@@ -32,6 +32,19 @@
   box-sizing: border-box;
 }
 
+/* Browsers hand form controls a font of their own, so this is the one rule
+   that has to undo it — a category rather than a list of the controls the site
+   happens to use today, since that drift arrives by omission. The shorthand is
+   the right instrument here: `.btn` sets its own size and leans on the page's
+   line-height, which `font-family` alone would take back to the UA's. */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
 body,
 h1,
 h2,
@@ -45,11 +58,6 @@ figure {
 ul {
   padding: 0;
   list-style: none;
-}
-
-button {
-  font: inherit;
-  color: inherit;
 }
 
 body {

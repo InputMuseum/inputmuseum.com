@@ -75,6 +75,12 @@ Design tokens live in `:root` in [public/css/01-base.css](public/css/01-base.css
   ```
   then re-stage what Prettier changed. Never run whole-tree `npm run format` as part of a normal commit — that belongs in its own dedicated commit.
 
+### Stylesheet vocabulary
+
+The shell's stylesheets hold one shared vocabulary and a new surface reaches for it rather than restating a treatment. A value becomes a `:root` token when components that are otherwise unalike have to agree on it; a treatment that recurs whole becomes a class; a repetition that is only two numbers coinciding is left alone.
+
+- **Controls inherit the page font.** Browsers hand `button`/`input`/`select`/`textarea` a font of their own, so one reset beside the `*` rule gives them the page's and no rule below it has to name a family to undo that. It is a category rule rather than a list of the controls the site uses today, because that drift arrives by omission — the range sliders had been sitting on the UA's Arial since they were written, and nobody had to do anything wrong for that to happen. The `font:` shorthand is the right instrument *here*, measured: `.btn` sets its own size and leans on the page's line-height, so `font-family` alone would take every button back to the UA's `normal` and change its height.
+
 ### Code comments
 
 - **Default to no comment**: A comment earns its place only by recording a durable *why* the code can't show: an invariant, a constraint, a non-obvious trade-off. Keep them generic enough that a routine change doesn't force a comment edit — put a per-item note *inline on the item*, never in a const-doc that re-describes the set's members (that rots the moment you add one). Don't name consumers or other modules ("used by X", "the status strip reads this"); don't restate a constant's value or units. Comment footprint matches code footprint — a concern touched at one line gets one comment there, not a header paragraph. Before committing, reread each comment and cut any that restates the code, names something that could be renamed, or would lie after a tune or refactor — an absent comment never goes stale.
