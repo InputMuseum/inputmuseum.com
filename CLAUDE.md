@@ -60,6 +60,7 @@ Design tokens live in `:root` in [public/css/01-base.css](public/css/01-base.css
 - `npm test` — `node --test`, which discovers the suite wherever it sits. Part of it guards conventions rather than behaviour: the web boundary, the CSS scoping rule, the registry against the filesystem, the breakpoint the layout shares with the shell. A convention that can be violated silently gets a test rather than a sentence in this file.
 - `npm run format:check` — CI runs it, so formatter drift cannot accumulate.
 - Serve with `python3 -m http.server -d public` from the repo root. Do not start a server on the user's behalf without being asked.
+- `rsvg-convert -w 1200 -h 630 og-image.svg -o public/og-image.png` — the social card. [og-image.svg](og-image.svg) is the source and stays out of `public/`, since a scraper wants the raster; edit the SVG and re-run rather than touching the PNG. It draws the site's own reel row, so a change to the cell's colours or proportions is a change here too.
 
 ## Conventions
 

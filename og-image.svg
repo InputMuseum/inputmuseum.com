@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="reel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0b0e" />
+      <stop offset="0.45" stop-color="#191b21" />
+      <stop offset="1" stop-color="#0a0b0e" />
+    </linearGradient>
+    <radialGradient id="spot" cx="0.5" cy="0.34" r="0.62">
+      <stop offset="0" stop-color="#d2ac6a" stop-opacity="0.07" />
+      <stop offset="1" stop-color="#d2ac6a" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0d0e11" />
+  <rect width="1200" height="630" fill="url(#spot)" />
+
+  <text
+    x="600"
+    y="214"
+    text-anchor="middle"
+    font-family="Palatino, Georgia, serif"
+    font-size="76"
+    fill="#e6e8ee"
+  >
+    Input<tspan fill="#d2ac6a">Museum</tspan>
+  </text>
+
+  <text
+    x="600"
+    y="270"
+    text-anchor="middle"
+    font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+    font-size="25"
+    fill="#8b909c"
+  >
+    Designs that work perfectly and are terrible to use.
+  </text>
+
+  <!-- The card row of an odometer, mid-entry: what the site is made of. -->
+  <g transform="translate(115, 360)">
+    <rect x="0" y="0" width="52" height="83" rx="4" fill="url(#reel)" stroke="#2b2f38" stroke-width="1" />
+    <text x="26" y="58" text-anchor="middle" font-family="Menlo, monospace" font-size="46" fill="#e6e8ee">4</text>
+    <rect x="57" y="0" width="52" height="83" rx="4" fill="url(#reel)" stroke="#2b2f38" stroke-width="1" />
+    <text x="83" y="58" text-anchor="middle" font-family="Menlo, monospace" font-size="46" fill="#e6e8ee">0</text>
+    <rect x="114" y="0" width="52" height="83" rx="4" fill="url(#reel)" stroke="#2b2f38" stroke-width="1" />
+    <text x="140" y="58" text-anchor="middle" font-family="Menlo, monospace" font-size="46" fill="#e6e8ee">1</text>
+    <rect x="171" y="0" width="52" height="83" rx="4" fill="url(#reel)" stroke="#2b2f38" stroke-width="1" />
+    <text x="197" y="58" text-anchor="middle" font-family="Menlo, monospace" font-size="46" fill="#e6e8ee">2</text>
+    <rect x="249" y="0" width="52" height="83" rx="4" fill="url(#reel)" stroke="#2b2f38" stroke-width="1" />
+    <text x="275" y="58" text-anchor="middle" font-family="Menlo, monospace" font-size="46" fill="#e6e8ee">8</text>
+    <rect x="306" y="0" width="52" height="83" rx="4" fill="url(#reel)" stroke="#2b2f38" stroke-width="1" />
+    <text x="332" y="58" text-anchor="middle" font-family="Menlo, monospace" font-size="46" fill="#e6e8ee">8</text>
+    <rect x="363" y="0" width="52" height="83" rx="4" fill="url(#reel)" stroke="#2b2f38" stroke-width="1" />
+    <text x="389" y="58" text-anchor="middle" font-family="Menlo, monospace" font-size="46" fill="#e6e8ee">8</text>
+    <rect x="420" y="0" width="52" height="83" rx="4" fill="url(#reel)" stroke="#d2ac6a" stroke-width="2" />
+    <text x="446" y="58" text-anchor="middle" font-family="Menlo, monospace" font-size="46" fill="#d2ac6a">0</text>
+    <rect x="498" y="0" width="52" height="83" rx="4" fill="url(#reel)" stroke="#2b2f38" stroke-width="1" />
+    <text x="524" y="58" text-anchor="middle" font-family="Menlo, monospace" font-size="46" fill="#565b66">0</text>
+    <rect x="555" y="0" width="52" height="83" rx="4" fill="url(#reel)" stroke="#2b2f38" stroke-width="1" />
+    <text x="581" y="58" text-anchor="middle" font-family="Menlo, monospace" font-size="46" fill="#565b66">0</text>
+    <rect x="612" y="0" width="52" height="83" rx="4" fill="url(#reel)" stroke="#2b2f38" stroke-width="1" />
+    <text x="638" y="58" text-anchor="middle" font-family="Menlo, monospace" font-size="46" fill="#565b66">0</text>
+    <rect x="669" y="0" width="52" height="83" rx="4" fill="url(#reel)" stroke="#2b2f38" stroke-width="1" />
+    <text x="695" y="58" text-anchor="middle" font-family="Menlo, monospace" font-size="46" fill="#565b66">0</text>
+    <rect x="747" y="0" width="52" height="83" rx="4" fill="url(#reel)" stroke="#2b2f38" stroke-width="1" />
+    <text x="773" y="58" text-anchor="middle" font-family="Menlo, monospace" font-size="46" fill="#565b66">0</text>
+    <rect x="804" y="0" width="52" height="83" rx="4" fill="url(#reel)" stroke="#2b2f38" stroke-width="1" />
+    <text x="830" y="58" text-anchor="middle" font-family="Menlo, monospace" font-size="46" fill="#565b66">0</text>
+    <rect x="861" y="0" width="52" height="83" rx="4" fill="url(#reel)" stroke="#2b2f38" stroke-width="1" />
+    <text x="887" y="58" text-anchor="middle" font-family="Menlo, monospace" font-size="46" fill="#565b66">0</text>
+    <rect x="918" y="0" width="52" height="83" rx="4" fill="url(#reel)" stroke="#2b2f38" stroke-width="1" />
+    <text x="944" y="58" text-anchor="middle" font-family="Menlo, monospace" font-size="46" fill="#565b66">0</text>
+  </g>
+
+  <text
+    x="600"
+    y="574"
+    text-anchor="middle"
+    font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+    font-size="21"
+    letter-spacing="2"
+    fill="#6b7079"
+  >
+    inputmuseum.com
+  </text>
+</svg>
