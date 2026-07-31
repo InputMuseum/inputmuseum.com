@@ -22,7 +22,7 @@ export const CATEGORIES = [
         id: "odometer",
         label: "The Odometer",
         blurb:
-          "Your card number, expiry and security code are, taken together, a single twenty-three digit number. Each digit is addressed by the quantity it represents rather than by where it happens to sit.",
+          "Every digit is addressed by the quantity it represents rather than by where it happens to sit — the quadrillions at the front of a card number, the hundreds at the front of a security code. Each field keeps its own scale, as is only proper.",
         cruelty: 4,
         added: "2026-07-29",
       },

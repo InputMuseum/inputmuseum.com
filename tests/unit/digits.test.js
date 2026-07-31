@@ -7,6 +7,7 @@ import {
   commitPlace,
   decayPending,
   emptyState,
+  formPlaces,
   isSettled,
   placeNames,
   remaining,
@@ -21,11 +22,6 @@ const LENGTH = fields.reduce((total, field) => total + field.length, 0);
 const fresh = () => emptyState(LENGTH);
 const enter = (state, place, digit) => commitPlace(setPending(selectPlace(state, place), digit));
 
-test("the whole payment form is addressed as one number", () => {
-  assert.equal(LENGTH, 23);
-  assert.equal(placeNames(LENGTH).length, LENGTH);
-});
-
 test("place names run from the top down and cover every length the site can reach", () => {
   const names = placeNames(23);
   assert.equal(names.at(0), "Ten sextillions");
@@ -36,6 +32,28 @@ test("place names run from the top down and cover every length the site can reac
   assert.equal(names.at(-5), "Ten thousands");
   assert.equal(names.at(-7), "Millions");
   for (const name of placeNames(24)) assert.match(name, /^[A-Z]/);
+});
+
+test("the form is named a field at a time, each with its own scale", () => {
+  const places = formPlaces(fields);
+  assert.equal(places.length, LENGTH);
+
+  assert.equal(places.at(0).name, "Quadrillions", "the front of a sixteen-digit card number");
+  assert.equal(places.at(15).name, "Ones");
+  assert.equal(places.at(16).name, "Thousands", "the expiry starts its own scale over");
+  assert.equal(places.at(19).name, "Ones");
+  assert.equal(places.at(20).name, "Hundreds", "and so does the security code");
+  assert.equal(places.at(-1).name, "Ones");
+});
+
+test("a place carries the field it belongs to, because three of them have a ones", () => {
+  const places = formPlaces(fields);
+  const ones = places.filter((place) => place.name === "Ones");
+  assert.equal(ones.length, fields.length);
+  assert.deepEqual(
+    ones.map((place) => place.field.name),
+    fields.map((field) => field.name),
+  );
 });
 
 test("a fresh machine has nothing entered", () => {

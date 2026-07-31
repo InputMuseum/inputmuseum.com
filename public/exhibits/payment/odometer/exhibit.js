@@ -6,7 +6,7 @@ import {
   decayPending,
   emptyState,
   isSettled,
-  placeNames,
+  formPlaces,
   remaining,
   report,
   selectPlace,
@@ -18,7 +18,11 @@ import { LENGTH, fields, slices } from "../form.js";
 
 export { fields };
 
-const PLACES = placeNames(LENGTH);
+const PLACES = formPlaces(fields);
+
+const named = (at) => `${PLACES[at].field.label} · ${PLACES[at].name}`;
+const spoken = (at) =>
+  `the ${PLACES[at].field.label.toLowerCase()}'s ${PLACES[at].name.toLowerCase()}`;
 
 const ROLL_MS_PER_STEP = 55;
 // Cruelty: an unsettled digit starts sliding back to zero if it is left alone,
@@ -85,7 +89,7 @@ export function mount(root, api) {
       el(
         "div",
         { class: "odo-controls" },
-        control("Place value", placeInput, placeName, [PLACES.at(0), PLACES.at(-1)]),
+        control("Place value", placeInput, placeName, [PLACES.at(0).name, PLACES.at(-1).name]),
         control("Digit", digitInput, null, [String(MAX_DIGIT), "0"]),
       ),
       el("div", { class: "actions" }, setBtn, tally),
@@ -108,7 +112,7 @@ export function mount(root, api) {
 
   placeInput.addEventListener(
     "change",
-    () => api.announce(`${PLACES[state.place]}. ${settledPhrase()}`),
+    () => api.announce(`${named(state.place)}. ${settledPhrase()}`),
     { signal: api.signal },
   );
 
@@ -129,7 +133,7 @@ export function mount(root, api) {
   render();
 
   function commit() {
-    const place = PLACES[state.place];
+    const place = named(state.place);
     const digit = state.pending;
     state = commitPlace(state);
     publish();
@@ -179,14 +183,14 @@ export function mount(root, api) {
     placeInput.value = String(state.place);
     placeInput.setAttribute(
       "aria-valuetext",
-      `${PLACES[state.place]}, digit ${state.place + 1} of ${LENGTH}, ${settledPhrase()}`,
+      `${named(state.place)}, digit ${state.place + 1} of ${LENGTH}, ${settledPhrase()}`,
     );
-    placeName.textContent = PLACES[state.place];
+    placeName.textContent = named(state.place);
 
     digitInput.value = String(MAX_DIGIT - state.pending);
     digitInput.setAttribute("aria-valuetext", String(state.pending));
 
-    setBtn.textContent = `Set ${PLACES[state.place].toLowerCase()} to ${state.pending}`;
+    setBtn.textContent = `Set ${spoken(state.place)} to ${state.pending}`;
     tally.textContent = `${remaining(state)} of ${LENGTH} still to enter`;
   }
 

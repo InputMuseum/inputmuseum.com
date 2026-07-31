@@ -24,6 +24,12 @@ const SCALES = [
 // digit however long the number is.
 export const placeNames = (length) => Array.from({ length }, (_, at) => placeName(length - 1 - at));
 
+// A form is not one number: each field names its own places and the scale
+// starts over at every one of them, which is why a place has to be said with
+// the field it belongs to — three of them have a ones.
+export const formPlaces = (form) =>
+  form.flatMap((field) => placeNames(field.length).map((name) => ({ field, name })));
+
 function placeName(exponent) {
   if (exponent < 3) return UNITS[exponent];
   const scale = `${SCALES[Math.floor(exponent / 3) - 1]}s`;
