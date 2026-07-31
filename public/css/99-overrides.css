@@ -1,7 +1,16 @@
+/* Only --dim and --line used to lift, which left everything under them where it
+   was: greys carrying real prose — an exhibit's instructions, the note in the
+   rail, what a "soon" badge says — below 4.5:1, and the reel's hover border
+   below 3:1. The text greys keep their order, so asking for contrast doesn't
+   flatten the hierarchy into one shade. */
 @media (prefers-contrast: more) {
   :root {
     --dim: #b7bcc6;
+    --faint: #a8aeb9;
+    --ghost: #9ea4af;
+    --ghost-dim: #959ba6;
     --line: #4b515c;
+    --line-strong: #6d7480;
   }
 }
 
