@@ -61,6 +61,7 @@ Design tokens live in `:root` in [public/css/01-base.css](public/css/01-base.css
 - `npm run format:check` — CI runs it, so formatter drift cannot accumulate.
 - Serve with `python3 -m http.server -d public` from the repo root. Do not start a server on the user's behalf without being asked.
 - `rsvg-convert -w 1200 -h 630 og-image.svg -o public/og-image.png` — the social card. [og-image.svg](og-image.svg) is the source and stays out of `public/`, since a scraper wants the raster; edit the SVG and re-run rather than touching the PNG. It draws the site's own reel row, so a change to the cell's colours or proportions is a change here too.
+- `rsvg-convert -w 48 -h 48 public/favicon.svg -o public/favicon-48.png`, and the same at 180 into `public/apple-touch-icon.png` — the raster icons. Here the vector is served as well as rastered, so unlike the card it belongs in `public/`; edit it and re-run rather than touching the PNGs. It is drawn on a 32 grid on whole units, which is what keeps the columns from blurring into each other at 16px.
 
 ## Conventions
 
