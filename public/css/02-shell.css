@@ -35,9 +35,15 @@
   color: var(--accent);
 }
 
+/* A single-column grid here declares its column rather than leaning on an
+   implicit one: an auto column takes its width from the widest line inside it,
+   so one long captured value would size the stage instead of the other way
+   round, and the plinth's max-width would have nothing definite to measure
+   against. */
 #main {
   grid-area: main;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto minmax(0, 1fr) auto;
   min-width: 0;
   overflow: hidden;
@@ -45,6 +51,7 @@
 
 #stage {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   place-items: center;
   padding: 8px 24px 28px;
   overflow: auto;
