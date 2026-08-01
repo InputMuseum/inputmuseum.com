@@ -18,6 +18,10 @@
 
   --rail-w: 232px;
   --plaque-w: 62ch;
+  /* Both payment exhibits render the form as a row of digit wheels, and a card
+     number reads as one row or it doesn't read as a card number — so they agree
+     on the size that keeps sixteen of them on a line. */
+  --wheel-size: clamp(13px, 3.7vw, 30px);
 
   /* Low to high, so the order is the system: the scrim dims for the rail it
      sits under, and the skip link outranks both because a focused one that

@@ -1,5 +1,4 @@
 [data-exhibit="payment/odometer"] .odo {
-  --odo-size: clamp(13px, 3.7vw, 30px);
   display: grid;
   gap: 26px;
   width: min(100%, 720px);
@@ -24,7 +23,7 @@
 [data-exhibit="payment/odometer"] .odo-wheels {
   display: flex;
   gap: 0.55em;
-  font-size: var(--odo-size);
+  font-size: var(--wheel-size);
   /* a card number stays one row: below the smallest legible size the wheels
      scroll rather than wrapping into something that isn't a card number */
   overflow-x: auto;

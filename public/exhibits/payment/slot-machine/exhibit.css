@@ -1,5 +1,4 @@
 [data-exhibit="payment/slot-machine"] .slot {
-  --slot-size: clamp(13px, 3.7vw, 30px);
   display: grid;
   gap: 24px;
   width: min(100%, 720px);
@@ -31,7 +30,9 @@
 [data-exhibit="payment/slot-machine"] .slot-reels {
   display: flex;
   gap: 0.55em;
-  font-size: var(--slot-size);
+  font-size: var(--wheel-size);
+  /* a card number stays one row: below the smallest legible size the reels
+     scroll rather than wrapping into something that isn't a card number */
   overflow-x: auto;
   padding-bottom: 2px;
 }
@@ -105,19 +106,8 @@
 }
 
 @media (max-width: 560px) {
-  /* The reel is the control here, so it can't shrink with the viewport the way
-     the odometer's readout does — below a tappable target it stops being a
-     control at all. Sixteen of them at that size don't fit a phone in one row,
-     so the card number wraps by its four-digit groups, which still reads as a
-     card number. */
   [data-exhibit="payment/slot-machine"] .slot {
-    --slot-size: 22px;
     gap: 20px;
-  }
-
-  [data-exhibit="payment/slot-machine"] .slot-reels {
-    flex-wrap: wrap;
-    row-gap: 6px;
   }
 
   [data-exhibit="payment/slot-machine"] .slot-pair {
