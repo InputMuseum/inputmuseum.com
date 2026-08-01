@@ -69,15 +69,20 @@
   background: var(--surface);
 }
 
+/* A form's worth of readouts is as wide as the form makes it, so the strip
+   stays one row and scrolls rather than wrapping into a block deep enough to
+   push the exhibit off the screen. */
 #statusFields {
   display: flex;
+  flex: 1 1 0;
   gap: 22px;
-  flex-wrap: wrap;
   min-width: 0;
+  overflow-x: auto;
 }
 
 .st-field {
   display: flex;
+  flex: none;
   flex-direction: column;
   gap: 1px;
 }
@@ -197,16 +202,11 @@
     padding: 10px 16px;
   }
 
-  /* a form's worth of readouts would otherwise wrap into a block deep enough
-     to push the exhibit off the screen */
+  /* the tools take a row of their own before the readouts are squeezed into a
+     strip too narrow to read one in */
   #statusFields {
+    flex-basis: 100%;
     gap: 16px;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-  }
-
-  .st-field {
-    flex: none;
   }
 
   .st-label {
