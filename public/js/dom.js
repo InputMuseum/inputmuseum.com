@@ -10,6 +10,7 @@ export const menuBtn = $("menuBtn"),
   scrim = $("scrim");
 export const tabList = $("tabList");
 export const plaqueTitle = $("plaqueTitle"),
+  plaqueLabel = $("plaqueLabel"),
   plaqueBlurb = $("plaqueBlurb"),
   plaqueMeta = $("plaqueMeta");
 export const stage = $("stage");

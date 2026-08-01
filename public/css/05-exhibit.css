@@ -12,6 +12,33 @@
   letter-spacing: 0.01em;
 }
 
+/* Padded to a tappable height rather than sized by its line — it is a control
+   on a phone, where the line alone would come to seventeen pixels. */
+#plaqueLabel > summary {
+  display: inline-block;
+  margin-top: 3px;
+  padding: 5px 6px;
+  color: var(--accent);
+  cursor: pointer;
+  list-style: none;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+#plaqueLabel > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* The control goes only where it has nothing left to offer: open, on a screen
+   with room for it. Keyed on the state rather than the width alone, because
+   hiding it whenever the screen is wide would strand the words behind a folded
+   label the visitor has no way to unfold. */
+@media (width > 860px) {
+  #plaqueLabel[open] > summary {
+    display: none;
+  }
+}
+
 #plaqueBlurb {
   margin-top: 6px;
   color: var(--dim);

@@ -1,4 +1,4 @@
-import { plaqueBlurb, plaqueMeta, plaqueTitle, stage } from "./dom.js";
+import { narrowMQ, plaqueBlurb, plaqueLabel, plaqueMeta, plaqueTitle, stage } from "./dom.js";
 import { el } from "./el.js";
 import { CRUELTY_MAX, lookup, openingRoute } from "./registry.js";
 import { formatRoute, replaceRoute, startRouter } from "./router.js";
@@ -13,6 +13,7 @@ buildRail();
 initMenu();
 initStatus();
 initSkipLink();
+narrowMQ.addEventListener("change", unfoldLabel);
 startRouter(onRoute);
 
 function onRoute(route) {
@@ -50,9 +51,17 @@ function initSkipLink() {
   });
 }
 
+// The label folds where the layout is tight and is simply open where it isn't,
+// so the summary the stylesheet hides on a wide screen is never the only way to
+// reach the words.
+function unfoldLabel() {
+  plaqueLabel.open = !narrowMQ.matches;
+}
+
 function fillPlaque(exhibit) {
   plaqueTitle.textContent = exhibit.label;
   plaqueBlurb.textContent = exhibit.blurb;
+  unfoldLabel();
   plaqueMeta.replaceChildren(
     el("span", { text: "Cruelty" }),
     pips(exhibit.cruelty),
