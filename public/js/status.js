@@ -1,7 +1,7 @@
 import { announce } from "./announce.js";
 import { receipt, receiptBody, resetBtn, statusClock, statusFields, submitBtn } from "./dom.js";
 import { el } from "./el.js";
-import { BLANK, snapshot, subscribe } from "./session.js";
+import { BLANK, isComplete, snapshot, subscribe } from "./session.js";
 import { restartExhibit } from "./stage.js";
 
 const TICK_MS = 1000;
@@ -26,9 +26,11 @@ function render() {
         "div",
         { class: "st-field" },
         el("span", { class: "eyebrow st-label", text: field.label }),
+        // A field with no declared width has no positions to blank, so its
+        // emptiness is the session's answer rather than a character in it.
         el("output", {
-          class: value.includes(BLANK) ? "st-value is-empty" : "st-value",
-          text: group(field, value),
+          class: isComplete(field, value) ? "st-value" : "st-value is-empty",
+          text: group(field, value) || BLANK,
         }),
       );
     }),
