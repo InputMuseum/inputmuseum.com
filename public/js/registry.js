@@ -40,8 +40,18 @@ export const CATEGORIES = [
   {
     id: "identity",
     label: "Personal information",
-    blurb: "Your name, chosen from everybody's.",
-    exhibits: [{ id: "name-picker", label: "The Name Picker", soon: true }],
+    blurb: "Four things you know by heart.",
+    exhibits: [
+      {
+        id: "generator",
+        label: "Generate Until It's Yours",
+        blurb:
+          "Typing is the slowest part of any form, so this one has none. Each field offers a single Generate button and fills itself with a real, correctly formatted value; press it again if that one wasn't yours. Every result is scored against the one before it, so you can watch the generator close in.",
+        cruelty: 5,
+        added: "2026-08-01",
+      },
+      { id: "name-picker", label: "The Name Picker", soon: true },
+    ],
   },
   {
     id: "dates",

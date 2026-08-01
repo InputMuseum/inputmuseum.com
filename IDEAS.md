@@ -15,7 +15,7 @@ An exhibit is one design idea carried across a whole form, so each item below sa
 ### Personal information — name, email, phone, address
 
 4. **The Directory** — the name is picked from a `<select>` of forty thousand entries, alphabetical, no search box and no type-ahead (the control eats keystrokes on purpose), with a helpful "Can't find it? Scroll down" pinned to the bottom. Email and address are picked the same way, from lists that are necessarily incomplete.
-5. **Generate Until It's Yours** — every field has one control, a Generate button producing a random plausible value. Keep pressing until it is you. A counter reports how close the last attempt was, character by character, which does not help.
+5. **Generate Until It's Yours** — personal information, 2026-08-01. The open question was whether an exhibit whose fields complete on their first press is one at all. It is: four presses fill the form, none of them fill in you, and no amount of pressing changes that — it is the fastest exhibit in the building and the only one that cannot hold your answer. The counter had nothing to measure a guess against except the guess before it, so that is what it reports, and two random draws share one or two characters and climb nowhere. The receipt needed no help either: four presses beat twenty-nine seconds of typing, so the comparison line states the punchline in the chrome's own plain voice.
 6. **By Map** — every field is answered by pinning a point on a satellite view of the whole planet. Address is fair enough; name and phone number are a stretch, which is the joke. Zoom is a two-step process and the map recentres on the origin each time.
 
 ### Dates — date of birth
