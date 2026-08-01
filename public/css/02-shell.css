@@ -157,6 +157,7 @@
   font-size: 17px;
   font-weight: 400;
   letter-spacing: 0.06em;
+  overflow-wrap: anywhere;
 }
 
 #receiptBody p + p {
