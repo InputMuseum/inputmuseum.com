@@ -14,7 +14,18 @@ export function initStatus() {
     announce("Cleared. Start again.");
   });
   submitBtn.addEventListener("click", showReceipt);
+  statusFields.addEventListener("scroll", markClipped);
+  window.addEventListener("resize", markClipped);
   render();
+}
+
+// Overlay scrollbars say nothing until they are used, so a readout running past
+// the end of the strip looks like a readout that ends there. The fade is only
+// while something is actually past it — worn permanently it would dim the last
+// characters of the value a visitor had just scrolled to reach.
+function markClipped() {
+  const past = statusFields.scrollWidth - statusFields.clientWidth - statusFields.scrollLeft;
+  statusFields.classList.toggle("is-clipped", past > 1);
 }
 
 function render() {
@@ -36,6 +47,7 @@ function render() {
     }),
   );
   submitBtn.disabled = !complete;
+  markClipped();
   renderClock();
 }
 
