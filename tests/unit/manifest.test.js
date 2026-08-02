@@ -121,6 +121,33 @@ test("every exhibit rule is scoped to its own exhibit", () => {
   }
 });
 
+// The scan is the thing holding the scope rule up, so it is worth knowing that
+// it reads what this repo writes — and, since it once refused a stylesheet that
+// was never breaking the rule, what it must not object to.
+test("the scan reads a stylesheet the way the rule means it", () => {
+  assert.deepEqual(selectors("[data-exhibit] .a,\n[data-exhibit] .b {\n  color: red;\n}"), [
+    "[data-exhibit] .a",
+    "[data-exhibit] .b",
+  ]);
+  assert.deepEqual(
+    selectors("@media (max-width: 1px) {\n  .inside {\n    color: red;\n  }\n}"),
+    [".inside"],
+    "a media query is descended into, since its rules are rules",
+  );
+  assert.deepEqual(
+    selectors(
+      "@keyframes spin {\n  from {\n    opacity: 0;\n  }\n  50% {\n    opacity: 0.5;\n  }\n}",
+    ),
+    [],
+    "a keyframe's steps are positions in an animation, not selectors",
+  );
+  assert.deepEqual(
+    selectors("@keyframes spin {\n  to {\n    opacity: 1;\n  }\n}\n.after {\n  color: red;\n}"),
+    [".after"],
+    "and the scan picks up again after the block it skipped",
+  );
+});
+
 // A text scan rather than a parser: it only has to be right about stylesheets
 // written the way this repo writes them, and loud when one isn't.
 function selectors(css) {
@@ -130,9 +157,26 @@ function selectors(css) {
   for (let cursor = 0; cursor < stripped.length; cursor++) {
     if (stripped[cursor] !== "{" && stripped[cursor] !== "}") continue;
     const prelude = stripped.slice(start, cursor).trim();
+    // A keyframe's steps are `from`, `to` and percentages — where a declaration
+    // sits in an animation, not what it applies to, so there is nothing for the
+    // scope rule to be true of and the whole block is stepped over.
+    if (stripped[cursor] === "{" && prelude.startsWith("@keyframes")) {
+      cursor = endOfBlock(stripped, cursor);
+      start = cursor + 1;
+      continue;
+    }
     if (stripped[cursor] === "{" && prelude && !prelude.startsWith("@"))
       found.push(...prelude.split(",").map((one) => one.trim()));
     start = cursor + 1;
   }
   return found;
+}
+
+function endOfBlock(css, open) {
+  let depth = 0;
+  for (let at = open; at < css.length; at++) {
+    if (css[at] === "{") depth++;
+    else if (css[at] === "}" && --depth === 0) return at;
+  }
+  return css.length;
 }
