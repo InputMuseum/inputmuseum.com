@@ -8,7 +8,7 @@ export function el(tag, attrs = {}, ...children) {
     if (value == null || value === false) continue;
     if (name === "class") node.className = value;
     else if (name === "text") node.textContent = value;
-    else node.setAttribute(name, value === true ? "" : value);
+    else node.setAttribute(name, value === true ? "true" : value);
   }
   node.append(...children.filter((child) => child != null));
   return node;
