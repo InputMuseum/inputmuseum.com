@@ -23,6 +23,7 @@ const PLACES = formPlaces(fields);
 const named = (at) => `${PLACES[at].field.label} · ${PLACES[at].name}`;
 const spoken = (at) =>
   `the ${PLACES[at].field.label.toLowerCase()}'s ${PLACES[at].name.toLowerCase()}`;
+const setLabel = (at, digit) => `Set ${spoken(at)} to ${digit}`;
 
 const ROLL_MS_PER_STEP = 55;
 // Cruelty: an unsettled digit starts sliding back to zero if it is left alone,
@@ -78,7 +79,17 @@ export function mount(root, api) {
     value: MAX_DIGIT,
   });
 
-  const setBtn = el("button", { class: "btn btn-primary odo-set", type: "button" });
+  const setText = el("span");
+  const setBtn = el(
+    "button",
+    { class: "btn btn-primary odo-set", type: "button" },
+    setText,
+    // Every label the button can show, for it to size to the widest; the digit
+    // is tabular, so one copy per place covers all ten.
+    ...PLACES.map((_, at) =>
+      el("span", { class: "odo-set-ghost", "aria-hidden": true, text: setLabel(at, 0) }),
+    ),
+  );
   const tally = el("p", { class: "tally" });
 
   root.append(
@@ -190,7 +201,8 @@ export function mount(root, api) {
     digitInput.value = String(MAX_DIGIT - state.pending);
     digitInput.setAttribute("aria-valuetext", String(state.pending));
 
-    setBtn.textContent = `Set ${spoken(state.place)} to ${state.pending}`;
+    setText.textContent = setLabel(state.place, state.pending);
+    setBtn.setAttribute("aria-label", setText.textContent);
     tally.textContent = `${remaining(state)} of ${LENGTH} still to enter`;
   }
 

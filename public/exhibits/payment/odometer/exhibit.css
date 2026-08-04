@@ -73,6 +73,22 @@
   height: 1.6em;
 }
 
+/* Sized by the largest label it can show, so the box doesn't move when the
+   label does. */
+[data-exhibit="payment/odometer"] .odo-set {
+  display: grid;
+  place-items: center;
+  max-width: 100%;
+}
+
+[data-exhibit="payment/odometer"] .odo-set > * {
+  grid-area: 1 / 1;
+}
+
+[data-exhibit="payment/odometer"] .odo-set-ghost {
+  visibility: hidden;
+}
+
 [data-exhibit="payment/odometer"] .odo-controls {
   display: grid;
   gap: 18px;
