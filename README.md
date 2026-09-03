@@ -45,3 +45,7 @@ npm run format:check && npm run lint && npm test
 ```
 
 Which is what CI runs on every push.
+
+## Licence
+
+[GPL-3.0](LICENSE) — take the building, take the furniture, leave the doors unlocked.
