@@ -70,6 +70,7 @@ Design tokens live in `:root` in [public/css/01-base.css](public/css/01-base.css
 ## Conventions
 
 - One concern per commit; split bundled diffs before committing.
+- Everything committed reads as its final state, written once — code comments, docs, IDEAS.md entries, commit messages and the shape of history alike. A follow-up that reshapes something still unpushed folds into the commit that introduced it, its message rewritten to describe only what ships, rather than landing as an add-then-amend pair; narration of rounds, revisions and who asked for what belongs in no committed text. The test: would it read the same if one author had written it in one sitting?
 - Commit subjects are single-line and imperative, with no prefixes — no task ids, no `feat:`/`fix:`.
 - Prose files (README, this file, IDEAS.md) are never manually line-wrapped — let lines run long.
 - A user-facing change ships its docs in the same commit; documenting it is part of the same concern, not a follow-up.
