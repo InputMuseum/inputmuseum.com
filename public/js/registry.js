@@ -34,7 +34,14 @@ export const CATEGORIES = [
         cruelty: 5,
         added: "2026-07-30",
       },
-      { id: "bureaucrat", label: "The Bureaucrat", soon: true },
+      {
+        id: "bureaucrat",
+        label: "The Bureaucrat",
+        blurb:
+          "Entries are accepted in the order they are made, and each one is verified, usually within three seconds, before the next is released. The ten digits are offered as a list that is ordered afresh every time it is opened, so that nobody can learn the positions and enter a card they cannot read.",
+        cruelty: 4,
+        added: "2026-09-04",
+      },
     ],
   },
   {

@@ -1,0 +1,114 @@
+[data-exhibit="payment/bureaucrat"] .bur {
+  display: grid;
+  gap: 24px;
+  width: min(100%, 720px);
+}
+
+[data-exhibit="payment/bureaucrat"] .bur-board {
+  display: grid;
+  gap: 16px;
+}
+
+[data-exhibit="payment/bureaucrat"] .bur-pair {
+  display: flex;
+  gap: 34px;
+  flex-wrap: wrap;
+}
+
+[data-exhibit="payment/bureaucrat"] .bur-field {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+[data-exhibit="payment/bureaucrat"] .bur-legend {
+  padding: 0;
+  margin-bottom: 6px;
+}
+
+[data-exhibit="payment/bureaucrat"] .bur-cells {
+  display: flex;
+  gap: 0.55em;
+  font-size: var(--wheel-size);
+  /* a card number stays one row: below the smallest legible size the cells
+     scroll rather than wrapping into something that isn't a card number */
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+[data-exhibit="payment/bureaucrat"] .bur-group {
+  display: flex;
+  gap: 2px;
+}
+
+[data-exhibit="payment/bureaucrat"] .bur-pick {
+  flex: none;
+  appearance: none;
+  width: 1.15em;
+  height: 1.6em;
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+  background: linear-gradient(#0a0b0e, #191b21 45%, #0a0b0e);
+  box-shadow: inset 0 0 0 1px #2b2f38;
+  color: #565b66;
+  font-family: var(--mono);
+  line-height: 1.6em;
+  text-align: center;
+  text-align-last: center;
+  cursor: pointer;
+}
+
+[data-exhibit="payment/bureaucrat"] .bur-pick:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+[data-exhibit="payment/bureaucrat"] .bur-pick.is-entered {
+  color: var(--text);
+}
+
+[data-exhibit="payment/bureaucrat"] .bur-pick.is-due {
+  box-shadow:
+    inset 0 0 0 1px rgba(var(--accent-rgb), 0.75),
+    0 0 14px -4px rgba(var(--accent-rgb), 0.5);
+  color: var(--accent);
+}
+
+[data-exhibit="payment/bureaucrat"] .bur-pick.is-verifying {
+  box-shadow: inset 0 0 0 1px rgba(var(--accent-rgb), 0.4);
+  color: rgba(var(--accent-rgb), 0.6);
+}
+
+[data-exhibit="payment/bureaucrat"] .bur-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(var(--accent-rgb), 0.25);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  /* held rather than taken out of the row, so nothing moves when a wait
+     starts or ends */
+  visibility: hidden;
+}
+
+[data-exhibit="payment/bureaucrat"] .bur-spinner.is-on {
+  visibility: visible;
+  animation: bur-spin 800ms steps(8) infinite;
+}
+
+@keyframes bur-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@media (max-width: 560px) {
+  [data-exhibit="payment/bureaucrat"] .bur {
+    gap: 20px;
+  }
+
+  [data-exhibit="payment/bureaucrat"] .bur-pair {
+    gap: 24px;
+  }
+}
